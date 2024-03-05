@@ -10,13 +10,13 @@ import TextArea from "@/components/textarea"
 import Link from "@/components/link"
 
 export interface ActivityFormProps {
-  activity?: Activity
+  activity?: Activity | any
 }
 
 const ActivityForm = ({ activity }: ActivityFormProps) => {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const [ formData, setFormData ] = useState({
+  const [ formData, setFormData ] = useState<Activity>({
     type: searchParams.get("activityType") || ACTIVITY_TYPES.SHORT,
     status: ACTIVITY_STATUS.TO_DO,
     text: "",
@@ -32,7 +32,7 @@ const ActivityForm = ({ activity }: ActivityFormProps) => {
     e.preventDefault()
     if (isEditForm) {
       setFormData({ ...formData, updatedAt: new Date() })
-      await updateActivity(activity.id, formData)
+      await updateActivity(activity?.id || "", formData)
       router.push(`${ROUTES.HOME}?activityType=${formData.type}`)
       return
     }

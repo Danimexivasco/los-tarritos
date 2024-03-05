@@ -1,9 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  typescript: {
-    // TODO: Remove next line, this is just for alpha testing
-    ignoreBuildErrors: true,
-  },
-};
+const nextConfig = {};
 
 export default nextConfig;

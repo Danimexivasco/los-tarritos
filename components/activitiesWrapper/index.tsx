@@ -48,7 +48,7 @@ const ActivitiesWrapper = ({}) => {
     )
   }
 
-  const getActivitiesByType = () => {
+  const getActivitiesByType = (): Array<DocumentData> | [] => {
     if (!activities || !Array.isArray(activities)) return []
     switch(activeTab) {
     case ACTIVITY_TYPES.SHORT:
@@ -57,6 +57,8 @@ const ActivitiesWrapper = ({}) => {
       return mediumActivities
     case ACTIVITY_TYPES.LARGE:
       return largeActivities
+    default:
+      return []
     }
   }
 
@@ -101,7 +103,7 @@ const ActivitiesWrapper = ({}) => {
         >New Activity ➕</Link>
         <Button
           text="Random Activity 🧙🏼‍♂️"
-          disabled={getActivitiesByType()?.filter(activity => (activity.type === activeTab && activity.status === ACTIVITY_STATUS.IN_PROGRESS)).length > 0}
+          disabled={getActivitiesByType()?.filter(activity => (activity?.type === activeTab && activity?.status === ACTIVITY_STATUS.IN_PROGRESS))?.length > 0 || false}
           className={"bg-amber-700 hover:bg-amber-900"}
           onClick={getRandomActivity}
         />

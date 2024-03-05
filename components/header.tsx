@@ -2,7 +2,8 @@
 import { logOut, useAuthState } from "@/services/auth";
 import { useRouter } from "next/navigation";
 import Button from "./button";
-import { AUTH_ROUTES } from "@/utils/constants";
+import { AUTH_ROUTES, ROUTES } from "@/utils/constants";
+import Link from "@/components/link";
 
 const Header = () => {
   const router = useRouter()
@@ -13,7 +14,7 @@ const Header = () => {
   }
   return(
     <header className="h-14 md:h-16 bg-cyan-500 text-white flex items-center p-4 justify-between">
-      <h1 className="text-xs md:text-lg">Los Tarritos 🏺</h1>
+      <Link href={ROUTES.HOME} className="text-xs md:text-lg text-white">Los Tarritos 🏺</Link>
       {user &&
       <div className="flex gap-2 items-center">
         <p className="text-xs">{user.email}</p>
