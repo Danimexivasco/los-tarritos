@@ -1,5 +1,5 @@
 import ActivitiesWrapper from "@/components/activitiesWrapper";
 
 export default function Home() {
-  return <ActivitiesWrapper />
+  return (<p>Home</p>)
 }
