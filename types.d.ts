@@ -5,6 +5,6 @@ export interface Activity {
   type: string
   status: string
   text: string
-  updatedAt?: Date | null
+  updatedAt?: Array<Date>
   createdAt: Date
 }

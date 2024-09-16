@@ -10,7 +10,7 @@ import ProtectedRoute from "@/components/protectedRoute";
 const inter = Inter({ subsets: [ "latin" ] });
 
 export const metadata: Metadata = {
-  title: "Los Tarritos 🏺",
+  title: "Nuestros Tarritos 🏺",
   description: "Una app canorranquica",
 };
 

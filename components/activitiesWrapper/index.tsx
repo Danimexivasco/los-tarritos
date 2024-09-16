@@ -5,11 +5,12 @@ import { useSearchParams } from "next/navigation"
 import { useAuthState } from "@/services/auth";
 import { updateActivity, useActivitiesData } from "@/services/activities";
 import { combine } from "@/utils/combineClassNames";
-import { ACTIVE_TAB_CLASSES, ACTIVITY_STATUS, ACTIVITY_TYPES, GENERAL_TAB_CLASSES, INACTIVE_TAB_CLASSES, ROUTES } from "@/utils/constants";
+import { ACTIVE_TAB_CLASSES, ACTIVITY_STATUS, ACTIVITY_TYPES, GENERAL_TAB_CLASSES, INACTIVE_TAB_CLASSES } from "@/utils/constants";
 import { showMsg } from "@/utils/showMessage";
 import ActivityItem from "./activity";
 import Button from "@/components/button";
 import Link from "@/components/link";
+import { getPath } from "@/utils/getPath";
 
 const ActivitiesWrapper = ({}) => {
   const searchParams = useSearchParams()
@@ -96,12 +97,12 @@ const ActivitiesWrapper = ({}) => {
       </div>
       <div className="grid gap-4 md:flex pt-6 ">
         <Link
-          href={`${ROUTES.NEW_ACTIVITY}?activityType=${activeTab}`}
+          href={`${getPath("New Activity")}?activityType=${activeTab}`}
           className={"bg-emerald-500 hover:bg-emerald-700 w-full flex items-center justify-center rounded p-4 text-white"}
         >New Activity ➕</Link>
         <Button
           text="Random Activity 🧙🏼‍♂️"
-          disabled={getActivitiesByType()?.filter(activity => (activity.type === activeTab && activity.status === ACTIVITY_STATUS.IN_PROGRESS)).length > 0}
+          disabled={(getActivitiesByType()?.filter(activity => (activity.type === activeTab && activity.status === ACTIVITY_STATUS.IN_PROGRESS))?.length ?? 1) > 0}
           className={"bg-amber-700 hover:bg-amber-900"}
           onClick={getRandomActivity}
         />
@@ -145,7 +146,6 @@ const ActivitiesWrapper = ({}) => {
               </div>
             )}
           </div>
-
       )
       }
     </section>

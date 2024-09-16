@@ -4,9 +4,10 @@ import React from "react"
 import Button from "@/components/button"
 import { combine } from "@/utils/combineClassNames"
 import { useRouter } from "next/navigation"
-import { ACTIVITY_STATUS, ROUTES } from "@/utils/constants"
+import { ACTIVITY_STATUS } from "@/utils/constants"
 import { deleteActivity, updateActivity } from "@/services/activities"
 import { DocumentData } from "firebase/firestore"
+import { getPath } from "@/utils/getPath"
 
 export interface ActivityProps {
   key?: string
@@ -41,7 +42,7 @@ const ActivityItem = ({ activity, className }: ActivityProps) => {
         <>
           <Button
             text="✏"
-            onClick={() => router.push(ROUTES.EDIT_ACTIVITY.replace(":id", id))}
+            onClick={() => router.push(getPath("Edit Activity", id))}
             className="bg-indigo-500 hover:bg-indigo-700 md:w-[50px] shadow-none"
           />
           <Button

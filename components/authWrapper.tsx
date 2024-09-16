@@ -1,12 +1,11 @@
 "use client"
 import React, { useState } from "react"
 import Button from "@/components/button";
-import { combine } from "@/utils/combineClassNames";
-import { ACTIVE_TAB_CLASSES, AUTH_ROUTES } from "@/utils/constants";
 import Link from "@/components/link";
 import Input from "@/components/input";
 import { useRouter } from "next/navigation";
 import { createUser, logIn } from "@/services/auth";
+import { AUTH_ROUTES } from "@/utils/routes";
 
 export interface AuthWrapperProps {
   screen: "login" | "register"
