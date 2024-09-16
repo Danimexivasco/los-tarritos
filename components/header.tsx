@@ -1,27 +1,19 @@
 "use client"
-import { logOut, useAuthState } from "@/services/auth";
-import { useRouter } from "next/navigation";
-import Button from "./button";
-import { AUTH_ROUTES, ROUTES } from "@/utils/constants";
-import Link from "@/components/link";
+import { useState } from "react";
+import { Squash as Hamburger } from "hamburger-react"
+import Menu from "./menu";
 
 const Header = () => {
-  const router = useRouter()
-  const [ user, loading, error ] = useAuthState();
-  const handleLogout = async () => {
-    await logOut()
-    router.push(AUTH_ROUTES.LOGIN)
-  }
+  const [ isOpen, setOpen ] = useState(false)
+  
   return(
-    <header className="h-14 md:h-16 bg-cyan-500 text-white flex items-center p-4 justify-between">
-      <Link href={ROUTES.HOME} className="text-xs md:text-lg text-white">Los Tarritos 🏺</Link>
-      {user &&
-      <div className="flex gap-2 items-center">
-        <p className="text-xs">{user.email}</p>
-        <Button text="Log Out" className="bg-red-500 hover:bg-red-700 text-xs md:text-md w-fit shadow-none" onClick={handleLogout}/>
-      </div>
-      }
-    </header>
+    <div className="relative">
+      <header className="h-14 md:h-16 bg-cyan-500 text-white flex items-center p-4 justify-between z-50 relative">
+        <h1 className="text-xs md:text-lg">Nuestros Tarritos 🏺</h1>
+        <Hamburger toggled={isOpen} toggle={setOpen} />
+      </header>
+      <Menu isOpen={isOpen} setOpen={setOpen}/>
+    </div>
   )
 }
 
