@@ -31,14 +31,14 @@ const ActivityForm = ({ activity }: ActivityFormProps) => {
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (isEditForm) {
-      setFormData({ ...formData, updatedAt: new Date() })
-      await updateActivity(activity.id, formData)
-      router.push(`${getPath("HOME")}?activityType=${formData.type}`)
+    if (isEditForm && activity?.id) {
+      const updatedData = { ...formData, updatedAt: [ ...(activity?.updatedAt || []), new Date() ] }
+      await updateActivity(activity.id, updatedData)
+      router.push(`${getPath("Random Activities")}?activityType=${formData.type}`)
       return
     }
     await createActivity(formData)
-    router.push(`${getPath("HOME")}?activityType=${formData.type}`)
+    router.push(`${getPath("Random Activities")}?activityType=${formData.type}`)
   }
 
   const isEditForm = Boolean(activity)

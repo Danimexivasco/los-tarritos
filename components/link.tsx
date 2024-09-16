@@ -7,7 +7,7 @@ export interface LinkProps {
   href: string
   asButton?: boolean
   children: React.ReactNode
-  className: string
+  className?: string
 }
 
 const Link = ({ href, asButton=false, children, className }: LinkProps) => {
