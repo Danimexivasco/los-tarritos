@@ -6,6 +6,7 @@ import { combine } from "@/utils/combineClassNames";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import ProtectedRoute from "@/components/protectedRoute";
+import Container from "@/components/container";
 
 const inter = Inter({ subsets: [ "latin" ] });
 
@@ -21,12 +22,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={combine(inter.className, "min-h-screen")}>
+      <body className={combine(inter.className, "min-h-screen h-full")}>
         <ProtectedRoute>
           <Header />
-          <main className="min-h-[calc(100vh-7rem)] md:min-h-[calc(100vh-7.5rem)] justify-between p-6 lg:p-12">
-            <Toaster position="top-center" />
-            {children}
+          <main >
+            <Container fullHeight>
+              <Toaster position="top-center" />
+              {children}
+            </Container>
           </main>
           <Footer text="Made with 💙 by 🍫"/>
         </ProtectedRoute>
