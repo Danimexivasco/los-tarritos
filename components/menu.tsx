@@ -21,12 +21,17 @@ const Menu = ({ isOpen, setOpen }: MenuProps) => {
     router.push(AUTH_ROUTES.LOGIN)
   }
 
+  const handleOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation()
+    setOpen(false)
+  }
+
   return (
     <div
       className={combine(MENU_CLASSES, `${isOpen ? "top-[56px] md:top-[64px] no-doc-scroll" : "top-[-105vh]"}`)}
     >
-      <div className=" w-100 h-[100vh] bg-black bg-opacity-75">
-        <nav className="px-5 py-10 bg-white">
+      <div className=" w-100 h-[100vh] bg-black bg-opacity-75" onClick={handleOutsideClick}>
+        <nav className="px-5 py-10 bg-white" onClick={e => e.stopPropagation()}>
           <ul className="space-y-4">
             {ROUTES.filter(route => route.onMenu).map((route) => (
               <li key={route.name} onClick={() => setOpen(false)}>
