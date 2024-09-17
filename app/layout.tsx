@@ -26,7 +26,7 @@ export default function RootLayout({
         <ProtectedRoute>
           <Header />
           <main >
-            <Container fullHeight>
+            <Container fullHeight centered>
               <Toaster position="top-center" />
               {children}
             </Container>
