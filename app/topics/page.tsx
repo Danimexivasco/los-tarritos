@@ -1,18 +1,17 @@
+import Link from "@/components/link"
+import TopicList from "@/components/topicList"
+import { getPath } from "@/utils/getPath"
 import React from "react"
 
 const Topics = ({}) => {
   return (
     <>
-      <h1 className="text-4xl">Topics</h1>
-      <p className="my-4">Coming soon...Page for having topics for talk about</p>
-      <h2 className="text-2xl">Expected functionality</h2>
-      <ul className="list-disc">
-        <li>List of topics to talk about</li>
-        <li>List of talked topics</li>
-        <li>Be able to drag and drop order of topics</li>
-        <li>Be able to change topic status</li>
-        <li>Be able to edit topics</li>
-      </ul>
+      <h1 className="text-4xl my-8">Topics</h1>
+      <Link
+        href={`${getPath("New Topic")}`}
+        className={"bg-emerald-500 hover:bg-emerald-700 w-full flex items-center justify-center rounded p-4 text-white my-8"}
+      >New Topic ➕</Link>
+      <TopicList />
     </>
   )
 }
