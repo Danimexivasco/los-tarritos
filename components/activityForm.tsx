@@ -45,7 +45,7 @@ const ActivityForm = ({ activity }: ActivityFormProps) => {
 
   return (
     <section>
-      <h1 className="text-3xl py-8">{isEditForm ? "Edit Activity" : "New Activity"}</h1>
+      <h1 className="text-4xl py-8">{isEditForm ? "Edit Activity" : "New Activity"}</h1>
       <form onSubmit={handleFormSubmit} className="grid gap-4 md:grid-cols-2">
         <Select
           options={ACTIVITY_TYPE_OPTIONS}
@@ -74,7 +74,7 @@ const ActivityForm = ({ activity }: ActivityFormProps) => {
             type="submit"
           />
           <Link
-            href={`${getPath("HOME")}?activityType=${formData.type}`}
+            href={`${getPath("Home")}?activityType=${formData.type}`}
             asButton
             className="bg-red-500 hover:bg-red-700"
           >Cancel</Link>

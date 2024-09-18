@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect } from "react"
+import React from "react"
 import { useSingleActivityData } from "@/services/activities"
 import ActivityForm from "@/components/activityForm"
 import { Activity as ActivityType } from "@/types"

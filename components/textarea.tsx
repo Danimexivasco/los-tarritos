@@ -3,7 +3,7 @@ import React from "react"
 
 export interface TextAreaProps {
   required?: boolean,
-  placeholder: string
+  placeholder?: string
   value: string
   label?: string
   onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void
