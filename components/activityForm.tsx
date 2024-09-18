@@ -3,11 +3,12 @@ import React, { useEffect, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { createActivity, updateActivity } from "@/services/activities"
 import { Activity } from "@/types"
-import { ACTIVITY_TYPE_OPTIONS, ACTIVITY_STATUS_OPTIONS, ACTIVITY_TYPES, ACTIVITY_STATUS, ROUTES } from "@/utils/constants"
+import { ACTIVITY_TYPE_OPTIONS, ACTIVITY_STATUS_OPTIONS, ACTIVITY_TYPES, ACTIVITY_STATUS } from "@/utils/constants"
 import Button from "@/components/button"
 import Select from "@/components/select"
 import TextArea from "@/components/textarea"
 import Link from "@/components/link"
+import { getPath } from "@/utils/getPath"
 
 export interface ActivityFormProps {
   activity?: Activity | any
@@ -30,21 +31,21 @@ const ActivityForm = ({ activity }: ActivityFormProps) => {
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (isEditForm) {
-      setFormData({ ...formData, updatedAt: new Date() })
-      await updateActivity(activity?.id || "", formData)
-      router.push(`${ROUTES.HOME}?activityType=${formData.type}`)
+    if (isEditForm && activity?.id) {
+      const updatedData = { ...formData, updatedAt: [ ...(activity?.updatedAt || []), new Date() ] }
+      await updateActivity(activity.id, updatedData)
+      router.push(`${getPath("Random Activities")}?activityType=${formData.type}`)
       return
     }
     await createActivity(formData)
-    router.push(`${ROUTES.HOME}?activityType=${formData.type}`)
+    router.push(`${getPath("Random Activities")}?activityType=${formData.type}`)
   }
 
   const isEditForm = Boolean(activity)
 
   return (
     <section>
-      <h1 className="text-3xl py-8">{isEditForm ? "Edit Activity" : "New Activity"}</h1>
+      <h1 className="text-4xl py-8">{isEditForm ? "Edit Activity" : "New Activity"}</h1>
       <form onSubmit={handleFormSubmit} className="grid gap-4 md:grid-cols-2">
         <Select
           options={ACTIVITY_TYPE_OPTIONS}
@@ -73,7 +74,7 @@ const ActivityForm = ({ activity }: ActivityFormProps) => {
             type="submit"
           />
           <Link
-            href={`${ROUTES.HOME}?activityType=${formData.type}`}
+            href={`${getPath("Home")}?activityType=${formData.type}`}
             asButton
             className="bg-red-500 hover:bg-red-700"
           >Cancel</Link>

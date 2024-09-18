@@ -1,8 +1,8 @@
 "use client"
-import React, { useEffect, useState, createContext } from "react"
+import React, { useEffect, createContext } from "react"
 import { useRouter, usePathname  } from "next/navigation";
 import { useAuthState } from "@/services/auth";
-import { AUTH_ROUTES } from "@/utils/constants";
+import { AUTH_ROUTES } from "@/utils/routes";
 
 export const UserContext = createContext<any>(null)
 const ProtectedRoute = ({ children }: Readonly<{
