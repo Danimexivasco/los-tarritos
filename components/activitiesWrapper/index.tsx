@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation"
 import { useAuthState } from "@/services/auth";
 import { updateActivity, useActivitiesData } from "@/services/activities";
 import { combine } from "@/utils/combineClassNames";
-import { ACTIVE_TAB_CLASSES, ACTIVITY_STATUS, ACTIVITY_TYPES, GENERAL_TAB_CLASSES, INACTIVE_TAB_CLASSES } from "@/utils/constants";
+import { ACTIVE_TAB_CLASSES, ACTIVITY_STATUS, ACTIVITY_TYPES, BG_DONE, BG_IN_PROGRESS, BG_TO_DO, GENERAL_TAB_CLASSES, INACTIVE_TAB_CLASSES } from "@/utils/constants";
 import { showMsg } from "@/utils/showMessage";
 import ActivityItem from "./activity";
 import Button from "@/components/button";
@@ -16,6 +16,7 @@ const ActivitiesWrapper = ({}) => {
   const searchParams = useSearchParams()
   const [ activeTab, setActiveTab ] = useState(searchParams.get("activityType") || ACTIVITY_TYPES.SHORT);
   const [ activitiesWithIds, setActivitiesWithIds ] = useState<Array<DocumentData>>([]);
+  // TODO: Refactor activities to just and object with key as type {short: [], medium: [], large: []}
   const [ shortActivities, setShortActivities ] = useState<Array<DocumentData>>([]);
   const [ mediumActivities, setMediumActivities ] = useState<Array<DocumentData>>([]);
   const [ largeActivities, setLargeActivities ] = useState<Array<DocumentData>>([]);
@@ -120,7 +121,7 @@ const ActivitiesWrapper = ({}) => {
                 <hr className="border-cyan-500/40 pb-6"/>
                 <div className="grid gap-2">
                   {getActivitiesByType()?.filter(activity => activity.status === ACTIVITY_STATUS.IN_PROGRESS).map(activity =>
-                    <ActivityItem key={activity.id} activity={activity} className="bg-amber-500/50"/>
+                    <ActivityItem key={activity.id} activity={activity} className={BG_IN_PROGRESS}/>
                   )}
                 </div>
               </div>
@@ -131,7 +132,7 @@ const ActivitiesWrapper = ({}) => {
                 <hr className="border-cyan-500/40 pb-6"/>
                 <div className="grid gap-2">
                   {getActivitiesByType()?.filter(activity => activity.status === ACTIVITY_STATUS.TO_DO).map(activity =>
-                    <ActivityItem key={activity.id} activity={activity} className="bg-emerald-500/50"/>
+                    <ActivityItem key={activity.id} activity={activity} className={BG_TO_DO}/>
                   )}
                 </div>
               </div>
@@ -142,7 +143,7 @@ const ActivitiesWrapper = ({}) => {
                 <hr className="border-cyan-500/40 pb-6"/>
                 <div className="grid gap-2">
                   {getActivitiesByType()?.filter(activity => activity.status === ACTIVITY_STATUS.DONE)?.map(activity =>
-                    <ActivityItem key={activity.id} activity={activity} className="bg-cyan-500/50"/>
+                    <ActivityItem key={activity.id} activity={activity} className={BG_DONE}/>
                   )}
                 </div>
               </div>

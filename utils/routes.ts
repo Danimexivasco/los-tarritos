@@ -28,7 +28,7 @@ export const ROUTES = [
     path: "/balances/new",
   },
   {
-    name: "Edit Balances",
+    name: "Edit Balance",
     path: "/balances/:id",
   },
   {
@@ -41,7 +41,7 @@ export const ROUTES = [
     path: "/topics/new",
   },
   {
-    name: "Edit Topics",
+    name: "Edit Topic",
     path: "/topics/:id",
   }
 ]
