@@ -8,6 +8,28 @@ export const ACTIVITY_STATUS = {
 export const ACTIVITY_TYPE_OPTIONS = Object.entries(ACTIVITY_TYPES).map(([ key, value ]) => ({ value: value, label: value }))
 export const ACTIVITY_STATUS_OPTIONS = Object.entries(ACTIVITY_STATUS).map(([ key, value ]) => ({ value: value, label: value }))
 
+export const TOPIC_STATUS = [ "To do", "Done" ] as const
+export const TOPIC_INPUTS = [
+  {
+    name: "status",
+    type: "select",
+    label: "Status",
+    options: TOPIC_STATUS.map(status => ({ value: status, label: status })),
+  },
+  {
+    name: "title",
+    type: "text",
+    label: "Title",
+    placeholder: "Title goes here",
+    required: true
+  },
+  {
+    name: "description",
+    type: "textarea",
+    label: "Description",
+    placeholder: "Describe here your topic..."
+  }
+]
 
 // Tailwind Classes
 export const ACTIVE_TAB_CLASSES = "bg-cyan-500 text-white shadow-md shadow-white";
@@ -15,3 +37,7 @@ export const INACTIVE_TAB_CLASSES = "bg-white hover:bg-cyan-100 text-black shado
 export const GENERAL_TAB_CLASSES = "p-4 rounded flex items-center justify-center text-lg font-bold";
 export const GENERAL_BUTTON_CLASSES = "w-full hover:bg-cyan-500/80 bg-cyan-500 text-white shadow-md shadow-white p-4 rounded flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed";
 export const MENU_CLASSES = " fixed left-0 right-0 z-40 overflow-hidden transition-all duration-500 ease-in-out shadow-neutral-800 shadow-md"
+export const BG_TO_DO = "bg-emerald-500/35"
+export const BG_IN_PROGRESS = "bg-amber-500/35"
+export const BG_DONE = "bg-purple-800/35"
+// TODO: Refactor classes for H1
