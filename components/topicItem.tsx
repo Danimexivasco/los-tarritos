@@ -5,7 +5,7 @@ import Button from "./button"
 import { getPath } from "@/utils/getPath"
 import { deleteTopic, updateTopic } from "@/services/topics"
 import { useRouter } from "next/navigation"
-import { BG_DONE, BG_TO_DO } from "@/utils/constants"
+import { BG_DONE, BG_TO_DO, DELETE_BTN_CLASSES, DONE_BTN_CLASSES, EDIT_BTN_CLASSES, REDO_BTN_CLASSES } from "@/utils/constants"
 import { formatDate } from "@/utils/formatDate"
 import { Timestamp } from "firebase/firestore"
 
@@ -39,14 +39,14 @@ const TopicItem = ({ id, title, description, status, updatedAt, createdAt, creat
           {(status === "To do") &&
             <Button
               text="☑"
-              className="bg-green-500 hover:bg-green-700 md:w-[50px] shadow-none"
+              className={DONE_BTN_CLASSES}
               onClick={() => updateTopic(id as string, { ...topic, status: "Done" })}
             />
           }
           {(status === "Done") &&
             <Button
               text="🔄"
-              className="bg-green-500 hover:bg-green-700 md:w-[50px] shadow-none"
+              className={REDO_BTN_CLASSES}
               onClick={() => updateTopic(id as string, { ...topic, status: "To do" })}
             />
           }
@@ -55,12 +55,12 @@ const TopicItem = ({ id, title, description, status, updatedAt, createdAt, creat
             <Button
               text="✏"
               onClick={() => router.push(getPath("Edit Topic", id))}
-              className="bg-indigo-500 hover:bg-indigo-700 md:w-[50px] shadow-slate-400 hover:shadow-none transition-all"
+              className={EDIT_BTN_CLASSES}
             />
             <Button
               text="🗑"
               onClick={() => deleteTopic(id)}
-              className="bg-red-500 hover:bg-red-700 md:w-[50px] shadow-slate-400 hover:shadow-none transition-all"
+              className={DELETE_BTN_CLASSES}
             />
           </>
           }
