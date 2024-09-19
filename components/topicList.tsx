@@ -5,6 +5,7 @@ import Link from "./link"
 import { getPath } from "@/utils/getPath"
 import { Topic } from "@/types"
 import TopicItem from "./topicItem"
+import { TOPIC_STATUS } from "@/utils/constants"
 
 const TopicList = ({}) => {
   const [ topicsByStatus, setTopicsByStatus ] = useState(null)
@@ -36,20 +37,22 @@ const TopicList = ({}) => {
       </>
     )
   }
-
   return topicsByStatus && (
-    Object.entries(topicsByStatus)?.map(([ status, topics ]) => {
-      const topicsArray = topics as Topic[];
-      return (
-        <div key={status} className="mb-8">
-          <h2 className="font-bold pb-2">{status}</h2>
-          <hr className="border-cyan-500/40 pb-6"/>
-          <ul className="grid gap-2">
-            {topicsArray?.map((topic: Topic) => <TopicItem key={topic.id} {...topic}/>)}
-          </ul>
-        </div>
-      )
-    })
+    Object.entries(topicsByStatus)
+      ?.sort(([ statusA ], [ statusB ]) =>
+        TOPIC_STATUS.indexOf(statusA as "To do" | "Done") - TOPIC_STATUS.indexOf(statusB as "To do" | "Done"))
+      ?.map(([ status, topics ]) => {
+        const topicsArray = topics as Topic[];
+        return (
+          <div key={status} className="mb-8">
+            <h2 className="font-bold pb-2 uppercase text-lg">{status}</h2>
+            <hr className="border-cyan-500/40 pb-6"/>
+            <ul className="grid gap-2">
+              {topicsArray?.map((topic: Topic) => <TopicItem key={topic.id} {...topic}/>)}
+            </ul>
+          </div>
+        )
+      })
   )
 }
 

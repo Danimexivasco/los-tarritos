@@ -3,7 +3,7 @@ import { combine } from "@/utils/combineClassNames"
 import React from "react"
 import Button from "./button"
 import { getPath } from "@/utils/getPath"
-import { deleteTopic } from "@/services/topics"
+import { deleteTopic, updateTopic } from "@/services/topics"
 import { useRouter } from "next/navigation"
 import { BG_DONE, BG_TO_DO } from "@/utils/constants"
 import { formatDate } from "@/utils/formatDate"
@@ -13,13 +13,15 @@ interface TopicItemProps {
   id?: string
   status: "To do" | "Done"
   title: string
+  description: string
   updatedAt?: Date | Timestamp
   createdAt: Date | Timestamp
   createdBy: string
   className?: string
 }
 
-const TopicItem = ({ id, title, status, updatedAt, createdAt, createdBy, className }: TopicItemProps) => {
+const TopicItem = ({ id, title, description, status, updatedAt, createdAt, createdBy, className }: TopicItemProps) => {
+  const topic = { id, title, description, status, updatedAt, createdAt, createdBy }
   const router = useRouter()
 
   return (
@@ -28,25 +30,26 @@ const TopicItem = ({ id, title, status, updatedAt, createdAt, createdBy, classNa
         status === "Done" ? BG_DONE : BG_TO_DO,
         className
       )}>
-      <div className="flex flex-col md:flex-row justify-between md:items-center gap-4">
-        <div className="flex gap-2">
-          <p><>{title}</></p>
+      <div className="flex flex-col md:flex-row justify-between md:items-center gap-8">
+        <div className="grid gap-2">
+          <h3 className="font-bold text-lg"><>{title}</></h3>
+          <p className="line-clamp-2">{description}</p>
         </div>
         <div className="flex flex-col md:flex-row items-center gap-2 w-full md:w-auto">
-          {/* {(status === ACTIVITY_STATUS.DONE && id) &&
-            <Button
-              text="🔄"
-              className="bg-green-500 hover:bg-green-700 md:w-[50px] shadow-none"
-              onClick={() => updateActivity(id, { ...activity, status: ACTIVITY_STATUS.TO_DO })}
-            />
-          }
-          {(status === ACTIVITY_STATUS.IN_PROGRESS && id) &&
+          {(status === "To do") &&
             <Button
               text="☑"
               className="bg-green-500 hover:bg-green-700 md:w-[50px] shadow-none"
-              onClick={() => updateActivity(id, { ...activity, status: ACTIVITY_STATUS.DONE })}
+              onClick={() => updateTopic(id as string, { ...topic, status: "Done" })}
             />
-          } */}
+          }
+          {(status === "Done") &&
+            <Button
+              text="🔄"
+              className="bg-green-500 hover:bg-green-700 md:w-[50px] shadow-none"
+              onClick={() => updateTopic(id as string, { ...topic, status: "To do" })}
+            />
+          }
           {id &&
           <>
             <Button
@@ -64,10 +67,10 @@ const TopicItem = ({ id, title, status, updatedAt, createdAt, createdBy, classNa
         </div>
       </div>
       <div className="flex items-center justify-between gap-6">
-        <p className="text-xs">Created by: {createdBy}</p>
-        {updatedAt ? <p className="text-xs">Updated at: {formatDate(updatedAt as Timestamp)}</p>
+        <i className="text-xs">Created by: <br/>{createdBy}</i>
+        {updatedAt ? <i className="text-xs">Updated at: <br/>{formatDate(updatedAt as Timestamp)}</i>
           :
-          <p className="text-xs">Created at: {formatDate(createdAt as Timestamp)}</p>
+          <i className="text-xs">Created at: <br/>{formatDate(createdAt as Timestamp)}</i>
         }
       </div>
     </li>
