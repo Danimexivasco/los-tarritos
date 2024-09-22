@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { Topic } from "@/types"
 import { createTopic, updateTopic, useSingleTopicData } from "@/services/topics"
-import { TOPIC_INPUTS, TOPIC_STATUS } from "@/utils/constants"
+import { CANCEL_BTN_CLASSES, CONFIRM_BTN_CLASSES, TOPIC_INPUTS, TOPIC_STATUS } from "@/utils/constants"
 import { getPath } from "@/utils/getPath"
 import Button from "@/components/button"
 import Input from "@/components/input"
@@ -72,13 +72,13 @@ const TopicForm = ({ id }: TopicFormProps) => {
         <div className="md:col-span-2 grid gap-4 md:grid-cols-2 mt-4">
           <Button
             text={isEdit ? "Update" : "Create"}
-            className="bg-emerald-500 hover:bg-emerald-700"
+            className={CONFIRM_BTN_CLASSES}
             type="submit"
           />
           <Link
             href={`${getPath("Topics")}`}
             asButton
-            className="bg-red-500 hover:bg-red-700"
+            className={CANCEL_BTN_CLASSES}
           >Cancel</Link>
         </div>
       </form>
