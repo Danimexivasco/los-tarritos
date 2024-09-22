@@ -3,6 +3,7 @@ import React from "react"
 
 export interface TextAreaProps {
   required?: boolean,
+  name?: string
   placeholder?: string
   value: string
   label?: string
@@ -10,12 +11,13 @@ export interface TextAreaProps {
   className?: string
 }
 
-const TextArea = ({ required=false, placeholder, value, label, onChange, className }: TextAreaProps) => {
+const TextArea = ({ required=false, placeholder, value, label, onChange, name, className }: TextAreaProps) => {
   return label ? (
     <div className="grid gap-2">
       <label><>{label}</></label>
       <textarea
         required={required}
+        name={name}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
@@ -25,6 +27,7 @@ const TextArea = ({ required=false, placeholder, value, label, onChange, classNa
   ) : (
     <textarea
       required={required}
+      name={name}
       placeholder={placeholder}
       value={value}
       onChange={onChange}
