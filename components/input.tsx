@@ -1,9 +1,10 @@
 import { combine } from "@/utils/combineClassNames"
-import React from "react"
+import React, { forwardRef } from "react";
 
 export interface InputProps {
   type: string
   required?: boolean,
+  name?: string
   placeholder?: string
   value: string
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
@@ -12,13 +13,15 @@ export interface InputProps {
   className?: string
 }
 
-const Input = ({ type, required=false, placeholder, value, onChange, minLength=undefined, label, className }: InputProps) => {
+const Input = forwardRef<HTMLInputElement, InputProps>(({ type, required=false, placeholder, value, onChange, minLength=undefined, label, name, className }, ref) => {
   return label ? (
     <label className="grid gap-2">
       {label}
       <input
+        ref={ref}
         required={required}
         type={type}
+        name={name}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
@@ -28,8 +31,10 @@ const Input = ({ type, required=false, placeholder, value, onChange, minLength=u
     </label>
   ) : (
     <input
+      ref={ref}
       required={required}
       type={type}
+      name={name}
       placeholder={placeholder}
       value={value}
       onChange={onChange}
@@ -37,6 +42,8 @@ const Input = ({ type, required=false, placeholder, value, onChange, minLength=u
       className={combine("border-2 border-cyan-500/30 p-4 rounded focus:outline-none focus:border-cyan-500", className)}
     />
   )
-}
+})
+// Set the display name
+Input.displayName = "Input";
 
 export default Input

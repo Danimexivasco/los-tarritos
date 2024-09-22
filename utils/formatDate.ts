@@ -1,7 +1,7 @@
 import { Timestamp } from "firebase/firestore"
+import { getDate } from "./getDate";
 
-export const formatDate = (date: Timestamp, locale ="es-ES", options?: Intl.DateTimeFormatOptions) => {
-  if (!date) return null
-  const _date = new Date(date?.seconds * 1000)
-  return Intl.DateTimeFormat(locale, options).format(_date)
+export const formatDate = (date: Timestamp | Date | undefined | string, locale ="es-ES", options?: Intl.DateTimeFormatOptions) => {
+  if (!date) return
+  return Intl.DateTimeFormat(locale, options).format(getDate(date))
 }

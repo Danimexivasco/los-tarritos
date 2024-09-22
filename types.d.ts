@@ -20,3 +20,26 @@ export interface Topic {
   createdAt: Date
   createdBy: string
 }
+
+interface Point {
+  id: string
+  text: string
+  isFromPreviousBalance?: boolean
+}
+interface Points {
+  good: Array<Point>
+  bad: Array<Point>
+}
+export interface Balance {
+  id?: string
+  date: Date | string | undefined
+  description?: string
+  points: Points
+  updatedAt?: Date
+  createdAt: Date
+  createdBy: string
+}
+
+export interface YearlyBalances {
+  [key: number]: Array<Balance>
+}

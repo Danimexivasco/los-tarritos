@@ -4,7 +4,7 @@ import React from "react"
 import Button from "@/components/button"
 import { combine } from "@/utils/combineClassNames"
 import { useRouter } from "next/navigation"
-import { ACTIVITY_STATUS } from "@/utils/constants"
+import { ACTIVITY_STATUS, DELETE_BTN_CLASSES, DONE_BTN_CLASSES, EDIT_BTN_CLASSES, REDO_BTN_CLASSES } from "@/utils/constants"
 import { deleteActivity, updateActivity } from "@/services/activities"
 import { DocumentData } from "firebase/firestore"
 import { getPath } from "@/utils/getPath"
@@ -27,14 +27,14 @@ const ActivityItem = ({ activity, className }: ActivityProps) => {
         {(status === ACTIVITY_STATUS.DONE && id) &&
           <Button
             text="🔄"
-            className="bg-green-500 hover:bg-green-700 md:w-[50px] shadow-none"
+            className={REDO_BTN_CLASSES}
             onClick={() => updateActivity(id, { ...activity, status: ACTIVITY_STATUS.TO_DO })}
           />
         }
         {(status === ACTIVITY_STATUS.IN_PROGRESS && id) &&
           <Button
             text="☑"
-            className="bg-green-500 hover:bg-green-700 md:w-[50px] shadow-none"
+            className={DONE_BTN_CLASSES}
             onClick={() => updateActivity(id, { ...activity, status: ACTIVITY_STATUS.DONE })}
           />
         }
@@ -43,12 +43,12 @@ const ActivityItem = ({ activity, className }: ActivityProps) => {
           <Button
             text="✏"
             onClick={() => router.push(getPath("Edit Activity", id))}
-            className="bg-indigo-500 hover:bg-indigo-700 md:w-[50px] shadow-none"
+            className={EDIT_BTN_CLASSES}
           />
           <Button
             text="🗑"
             onClick={() => deleteActivity(id)}
-            className="bg-red-500 hover:bg-red-700 md:w-[50px] shadow-none"
+            className={DELETE_BTN_CLASSES}
           />
         </>
         }
