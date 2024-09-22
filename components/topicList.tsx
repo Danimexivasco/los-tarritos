@@ -12,8 +12,8 @@ const TopicList = ({}) => {
   const [ topics, loading, error, snapshot ] = useTopicsData()
   
   useEffect(() => {
-    if (Array.isArray(topics)) {
-      const _topicsWithIds = topics?.map((topic, index) => {
+    if (Array.isArray(topics) && topics?.length > 0) {
+      const _topicsWithIds = topics.map((topic, index) => {
         return { id: snapshot?.docs[ index ].id, ...topic };
       });
       const _topicsByStatus = _topicsWithIds.reduce((acc, item) => {

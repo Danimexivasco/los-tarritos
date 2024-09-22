@@ -32,7 +32,7 @@ const ActivitiesWrapper = ({}) => {
       });
       setActivitiesWithIds(_activitiesWithIds)
     }
-  }, [ activities, snapshot ])
+  }, [ activities, snapshot?.docs?.length ])
 
   useEffect(() => {
     if (activitiesWithIds && Array.isArray(activitiesWithIds)) {

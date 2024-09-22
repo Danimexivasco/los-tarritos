@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { createActivity, updateActivity } from "@/services/activities"
 import { Activity } from "@/types"
-import { ACTIVITY_TYPE_OPTIONS, ACTIVITY_STATUS_OPTIONS, ACTIVITY_TYPES, ACTIVITY_STATUS } from "@/utils/constants"
+import { ACTIVITY_TYPE_OPTIONS, ACTIVITY_STATUS_OPTIONS, ACTIVITY_TYPES, ACTIVITY_STATUS, CANCEL_BTN_CLASSES, CONFIRM_BTN_CLASSES } from "@/utils/constants"
 import Button from "@/components/button"
 import Select from "@/components/select"
 import TextArea from "@/components/textarea"
@@ -70,13 +70,13 @@ const ActivityForm = ({ activity }: ActivityFormProps) => {
         <div className="md:col-span-2 grid gap-4 md:grid-cols-2 mt-4">
           <Button
             text={isEditForm ? "Update Activity" : "Create Activity"}
-            className="bg-emerald-500 hover:bg-emerald-700"
+            className={CONFIRM_BTN_CLASSES}
             type="submit"
           />
           <Link
             href={`${getPath("Home")}?activityType=${formData.type}`}
             asButton
-            className="bg-red-500 hover:bg-red-700"
+            className={CANCEL_BTN_CLASSES}
           >Cancel</Link>
         </div>
       </form>
