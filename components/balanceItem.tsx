@@ -19,32 +19,34 @@ const BalanceItem = ({ text, isGood, isFromPreviousBalance, onRemove, onEdit, on
       "grid grid-cols-1 md:flex gap-4 justify-between items-center rounded p-4 border-solid border-2",
       isGood && "border-emerald-200",
       !isGood && !isFromPreviousBalance && "border-red-200",
-      isFromPreviousBalance && "bg-orange-400/30 border-orange-200",
+      isFromPreviousBalance && "bg-orange-400/30 border-orange-200 md:grid gap-4",
       className)}
     >
       <p>{text}</p>
-      <div className="flex gap-4">
-        <Button
-          type="button"
-          text="Edit"
-          className={EDIT_BTN_CLASSES}
-          onClick={onEdit}
-        />
-        <Button
-          type="button"
-          text="Delete"
-          className={DELETE_BTN_CLASSES}
-          onClick={onRemove}
-        />
+      <div className="grid gap-4">
+        <div className="flex gap-4">
+          <Button
+            type="button"
+            text="Edit"
+            className={EDIT_BTN_CLASSES}
+            onClick={onEdit}
+          />
+          <Button
+            type="button"
+            text="Delete"
+            className={DELETE_BTN_CLASSES}
+            onClick={onRemove}
+          />
+        </div>
+        {isFromPreviousBalance && (
+          <Button
+            type="button"
+            text="SOLUCIONAO 👌"
+            className={SOLVE_BTN_CLASSES}
+            onClick={onSolve}
+          />
+        )}
       </div>
-      {isFromPreviousBalance && (
-        <Button
-          type="button"
-          text="SOLUCIONAO 👌"
-          className={SOLVE_BTN_CLASSES}
-          onClick={onSolve}
-        />
-      )}
     </li>
   )
 }
