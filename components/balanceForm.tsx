@@ -132,14 +132,14 @@ const BalanceForm = ({ id }: BalanceForm) => {
   // TODO: Refactor this component
   return (
     <>
-      <div className="flex justify-between items-center mb-10">
-        <Headline as="h2" classname="pt-8">{isEdit ? "Edit Balance": "New Balance"}</Headline>
+      <div className="flex justify-between items-center mb-10 mt-4 gap-4">
+        <Headline as="h2">{isEdit ? "Edit Balance": "New Balance"}</Headline>
         {isEdit &&
           <Button
             text="🗑 DELETE"
             type="button"
             onClick={removeBalance}
-            className={combine(DELETE_BTN_CLASSES, "w-auto")}
+            className={combine(DELETE_BTN_CLASSES, "w-fit")}
           />
         }
       </div>
