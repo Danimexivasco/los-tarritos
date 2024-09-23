@@ -6,6 +6,7 @@ import Input from "@/components/input";
 import { useRouter } from "next/navigation";
 import { createUser, logIn } from "@/services/auth";
 import { AUTH_ROUTES } from "@/utils/routes";
+import Headline from "./headline";
 
 export interface AuthWrapperProps {
   screen: "login" | "register"
@@ -48,7 +49,7 @@ const AuthWrapper = ({ screen = "login" }:AuthWrapperProps) => {
   return (
     <section className="grid place-items-center h-[calc(100vh-7rem)] md:h-[calc(100vh-7.5rem)]">
       <div className="md:w-[40vw] max-w-96">
-        <h1 className="text-4xl pb-6 text-center"> {screen === "login" ? "Login": "Register" }</h1>
+        <Headline as="h1" classname="pb-6 text-center">{screen === "login" ? "Login": "Register" }</Headline>
         <form className="grid gap-6 my-4" onSubmit={handleSubmit}>
           <Input
             required

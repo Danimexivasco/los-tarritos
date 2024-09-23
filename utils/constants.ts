@@ -69,4 +69,11 @@ export const BG_DONE = "bg-purple-800/35"
 export const NEUTRAL_CARD_CLASSES = "border-cyan-500/40 hover:border-cyan-500 color-cyan rounded hover:cursor-pointer border-2 p-4 flex flex-col gap-16  h-full"
 export const POSITIVE_CARD_CLASSES = "border-emerald-500/60 hover:border-emerald-500 text-emerald-500"
 export const NEGATIVE_CARD_CLASSES = "border-red-500/40 hover:border-red-500 text-red-500"
-// TODO: Refactor classes for H1
+export const HEADLINE_CLASSES = {
+  h1: "text-4xl uppercase",
+  h2: "text-3xl uppercase",
+  h3: "text-2xl",
+  h4: "text-xl",
+  h5: "text-lg",
+  h6: "text-md",
+}

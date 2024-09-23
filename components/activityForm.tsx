@@ -9,6 +9,7 @@ import Select from "@/components/select"
 import TextArea from "@/components/textarea"
 import Link from "@/components/link"
 import { getPath } from "@/utils/getPath"
+import Headline from "./headline"
 
 export interface ActivityFormProps {
   activity?: Activity | any
@@ -45,7 +46,7 @@ const ActivityForm = ({ activity }: ActivityFormProps) => {
 
   return (
     <section>
-      <h1 className="text-4xl py-8">{isEditForm ? "Edit Activity" : "New Activity"}</h1>
+      <Headline as="h2" classname="py-8">{isEditForm ? "Edit Activity" : "New Activity"}</Headline>
       <form onSubmit={handleFormSubmit} className="grid gap-4 md:grid-cols-2">
         <Select
           options={ACTIVITY_TYPE_OPTIONS}
