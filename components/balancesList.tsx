@@ -7,6 +7,7 @@ import { Balance, YearlyBalances } from "@/types"
 import Card from "./card"
 import { formatDate } from "@/utils/formatDate"
 import { getDate } from "@/utils/getDate"
+import Headline from "./headline"
 
 const BalancesList = ({}) => {
   const [ balances, loading, error, snapshot ] = useBalancesData()
@@ -78,7 +79,7 @@ const BalancesList = ({}) => {
         ?.sort(([ key ], [ key2 ]) => Number(key2) - Number(key))
         ?.map(([ key, items ]) => (
           <div key={key} data-key={key} className="my-10">
-            <h2 className="font-bold pb-2 uppercase text-lg">{key}</h2>
+            <Headline as="h2" classname="font-bold text-lg">{key}</Headline>
             <hr className="border-cyan-500/40 pb-6"/>
             <ul className="grid gap-4 md:grid-cols-3">
               {items

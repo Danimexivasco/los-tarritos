@@ -25,7 +25,7 @@ export default function RootLayout({
       <body className={combine(inter.className, "min-h-screen h-full")}>
         <ProtectedRoute>
           <Header />
-          <main >
+          <main>
             <Container fullHeight centered>
               <Toaster position="top-center" />
               {children}

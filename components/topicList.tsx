@@ -6,6 +6,7 @@ import { getPath } from "@/utils/getPath"
 import { Topic } from "@/types"
 import TopicItem from "./topicItem"
 import { TOPIC_STATUS } from "@/utils/constants"
+import Headline from "./headline"
 
 const TopicList = ({}) => {
   const [ topicsByStatus, setTopicsByStatus ] = useState(null)
@@ -45,7 +46,7 @@ const TopicList = ({}) => {
         const topicsArray = topics as Topic[];
         return (
           <div key={status} className="mb-8">
-            <h2 className="font-bold pb-2 uppercase text-lg">{status}</h2>
+            <Headline as="h2" classname="font-bold text-lg leading-9">{status}</Headline>
             <hr className="border-cyan-500/40 pb-6"/>
             <ul className="grid gap-2">
               {topicsArray?.map((topic: Topic) => <TopicItem key={topic.id} {...topic}/>)}

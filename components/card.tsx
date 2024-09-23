@@ -4,6 +4,7 @@ import { formatDate } from "@/utils/formatDate"
 import { Points } from "@/types"
 import { combine } from "@/utils/combineClassNames"
 import { NEGATIVE_CARD_CLASSES, NEUTRAL_CARD_CLASSES, POSITIVE_CARD_CLASSES } from "@/utils/constants"
+import Headline from "./headline"
 
 interface CardProps {
   title: string
@@ -20,7 +21,7 @@ interface CardProps {
 const CardContent = ({ title, description, isBalance, points, createdAt }: CardProps) => (
   <>
     <div className="flex-1">
-      <h3 className="text-2xl capitalize mb-4 bold">{title}</h3>
+      <Headline as="h3" classname="capitalize mb-4 ">{title}</Headline>
       <p>{description}</p>
     </div>
     {isBalance && (
