@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation"
 import { BG_DONE, BG_TO_DO, DELETE_BTN_CLASSES, DONE_BTN_CLASSES, EDIT_BTN_CLASSES, REDO_BTN_CLASSES } from "@/utils/constants"
 import { formatDate } from "@/utils/formatDate"
 import { Timestamp } from "firebase/firestore"
+import Headline from "./headline"
 
 interface TopicItemProps {
   id?: string
@@ -32,7 +33,7 @@ const TopicItem = ({ id, title, description, status, updatedAt, createdAt, creat
       )}>
       <div className="flex flex-col md:flex-row justify-between md:items-center gap-8">
         <div className="grid gap-2">
-          <h3 className="font-bold text-lg"><>{title}</></h3>
+          <Headline as="h3" classname="text-lg font-bold">{title}</Headline>
           <p className="line-clamp-2">{description}</p>
         </div>
         <div className="flex flex-col md:flex-row items-center gap-2 w-full md:w-auto">

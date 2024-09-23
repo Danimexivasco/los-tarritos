@@ -11,6 +11,7 @@ import Link from "@/components/link"
 import { UserContext } from "@/components/protectedRoute"
 import Select from "@/components/select"
 import TextArea from "@/components/textarea"
+import Headline from "./headline"
 
 interface TopicFormProps {
   id?: string
@@ -43,7 +44,7 @@ const TopicForm = ({ id }: TopicFormProps) => {
 
   return (
     <>
-      <h1 className="text-4xl pb-8">{isEdit ? "Edit Topic": "New Topic"}</h1>
+      <Headline as="h2" classname="py-8">{isEdit ? "Edit Topic": "New Topic"}</Headline>
       <form className="grid gap-4" onSubmit={handleSubmit}>
         {TOPIC_INPUTS.map((input) => {
           if (input.type === "textarea") {

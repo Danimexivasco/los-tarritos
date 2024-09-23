@@ -16,6 +16,7 @@ import { generateId } from "@/utils/idGenerator"
 import { formatDate } from "@/utils/formatDate"
 import { getDate } from "@/utils/getDate"
 import { combine } from "@/utils/combineClassNames"
+import Headline from "./headline"
 
 interface BalanceForm {
   id?: string
@@ -131,14 +132,14 @@ const BalanceForm = ({ id }: BalanceForm) => {
   // TODO: Refactor this component
   return (
     <>
-      <div className="flex justify-between items-center mb-10">
-        <h1 className="text-4xl">{isEdit ? "Edit Balance": "New Balance"}</h1>
+      <div className="flex justify-between items-center mb-10 mt-4 gap-4">
+        <Headline as="h2">{isEdit ? "Edit Balance": "New Balance"}</Headline>
         {isEdit &&
           <Button
             text="🗑 DELETE"
             type="button"
             onClick={removeBalance}
-            className={combine(DELETE_BTN_CLASSES, "w-auto")}
+            className={combine(DELETE_BTN_CLASSES, "w-fit")}
           />
         }
       </div>
@@ -148,7 +149,7 @@ const BalanceForm = ({ id }: BalanceForm) => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x mb-16">
           <div className="py-8 md:py-0 pr-0 md:pr-8">
-            <h3 className="text-2xl pb-4">Good points</h3>
+            <Headline as="h3" classname="text-2xl pb-4">Good points</Headline>
             <div className="grid gap-2 mb-6">
               <Input
                 ref={goodPointRef}
@@ -180,7 +181,7 @@ const BalanceForm = ({ id }: BalanceForm) => {
             </ul>
           </div>
           <div className="py-8 md:py-0 pl-0 md:pl-8">
-            <h3 className="text-2xl pb-4">Bad points</h3>
+            <Headline as="h3" classname="text-2xl pb-4">Bad points</Headline>
             <div className="grid gap-2 mb-6">
               <Input
                 ref={badPointRef}

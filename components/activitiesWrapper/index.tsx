@@ -11,6 +11,7 @@ import ActivityItem from "./activity";
 import Button from "@/components/button";
 import Link from "@/components/link";
 import { getPath } from "@/utils/getPath";
+import Headline from "../headline";
 
 const ActivitiesWrapper = ({}) => {
   const searchParams = useSearchParams()
@@ -117,7 +118,7 @@ const ActivitiesWrapper = ({}) => {
           >
             {getActivitiesByType()?.some(activity => activity.status === ACTIVITY_STATUS.IN_PROGRESS) && (
               <div>
-                <h2 className="font-bold pb-2">In Progress</h2>
+                <Headline as="h2" classname="font-bold text-lg leading-9">In Progress</Headline>
                 <hr className="border-cyan-500/40 pb-6"/>
                 <div className="grid gap-2">
                   {getActivitiesByType()?.filter(activity => activity.status === ACTIVITY_STATUS.IN_PROGRESS).map(activity =>
@@ -128,7 +129,7 @@ const ActivitiesWrapper = ({}) => {
             )}
             {getActivitiesByType()?.some(activity => activity.status === ACTIVITY_STATUS.TO_DO) && (
               <div>
-                <h2 className="font-bold pb-2">To do</h2>
+                <Headline as="h2" classname="font-bold text-lg leading-9">To do</Headline>
                 <hr className="border-cyan-500/40 pb-6"/>
                 <div className="grid gap-2">
                   {getActivitiesByType()?.filter(activity => activity.status === ACTIVITY_STATUS.TO_DO).map(activity =>
@@ -139,7 +140,7 @@ const ActivitiesWrapper = ({}) => {
             )}
             {getActivitiesByType()?.some(activity => activity.status === ACTIVITY_STATUS.DONE) && (
               <div>
-                <h2 className="font-bold pb-2">Done</h2>
+                <Headline as="h2" classname="font-bold text-lg leading-9">Done</Headline>
                 <hr className="border-cyan-500/40 pb-6"/>
                 <div className="grid gap-2">
                   {getActivitiesByType()?.filter(activity => activity.status === ACTIVITY_STATUS.DONE)?.map(activity =>

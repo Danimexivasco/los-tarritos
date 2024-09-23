@@ -1,10 +1,11 @@
 import BalancesList from "@/components/balancesList"
+import Headline from "@/components/headline"
 import React from "react"
 
 const Balances = () => {
   return (
     <>
-      <h1 className="text-4xl mb-8 font-bold">Balances</h1>
+      <Headline as="h1" classname="mb-8 mt-4">Balances</Headline>
       <BalancesList />
     </>
   )
