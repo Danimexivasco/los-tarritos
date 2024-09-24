@@ -1,11 +1,12 @@
+import { useRouter } from "next/navigation"
+import { logOut, useAuthState } from "@/services/auth"
+import { AUTH_ROUTES, ROUTES } from "@/utils/routes"
 import { combine } from "@/utils/combineClassNames"
 import { MENU_CLASSES } from "@/utils/constants"
 import React from "react"
 import Link from "./link"
 import Button from "./button"
-import { logOut, useAuthState } from "@/services/auth"
-import { useRouter } from "next/navigation"
-import { AUTH_ROUTES, ROUTES } from "@/utils/routes"
+import LogoutIcon from "@/public/icons/logout.svg"
 
 export interface MenuProps {
   isOpen: boolean
@@ -43,6 +44,7 @@ const Menu = ({ isOpen, setOpen }: MenuProps) => {
                 <div className="grid gap-2 mt-12">
                   <p className="text-xs">Logged in as <i>{user.email}</i></p>
                   <Button
+                    icon={<LogoutIcon className="w-5 h-5"/>}
                     text="Log Out"
                     className="bg-red-500 hover:bg-red-700 text-xs md:text-md !w-fit shadow-none"
                     onClick={handleLogout}

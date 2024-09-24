@@ -17,6 +17,8 @@ import { formatDate } from "@/utils/formatDate"
 import { getDate } from "@/utils/getDate"
 import { combine } from "@/utils/combineClassNames"
 import Headline from "./headline"
+import TrashIcon from "@/public/icons/trash.svg"
+import PlusIcon from "@/public/icons/plus.svg"
 
 interface BalanceForm {
   id?: string
@@ -136,10 +138,11 @@ const BalanceForm = ({ id }: BalanceForm) => {
         <Headline as="h2">{isEdit ? "Edit Balance": "New Balance"}</Headline>
         {isEdit &&
           <Button
-            text="🗑 DELETE"
+            icon={<TrashIcon className="w-5 h-5"/>}
+            text="Delete"
             type="button"
             onClick={removeBalance}
-            className={combine(DELETE_BTN_CLASSES, "w-fit")}
+            className={combine(DELETE_BTN_CLASSES, "!w-fit uppercase")}
           />
         }
       </div>
@@ -160,7 +163,9 @@ const BalanceForm = ({ id }: BalanceForm) => {
                 className="w-full border-2 border-emerald-500/30 focus:border-emerald-500"
               />
               <Button
-                text="Add +"
+                icon={<PlusIcon className="w-4 h-4"/>}
+                iconRight
+                text="Add"
                 type="button"
                 onClick={() => handleAddedPoint("good")}
                 className="bg-emerald-600 hover:bg-emerald-700 shadow-gray-400 hover:shadow-none"
@@ -192,7 +197,9 @@ const BalanceForm = ({ id }: BalanceForm) => {
                 className="w-full border-2 border-red-500/30 focus:border-red-500"
               />
               <Button
-                text="Add +"
+                icon={<PlusIcon className="w-4 h-4"/>}
+                iconRight
+                text="Add"
                 type="button"
                 onClick={() => handleAddedPoint("bad")}
                 className="bg-red-700 hover:bg-red-800 shadow-gray-400 hover:shadow-none"
