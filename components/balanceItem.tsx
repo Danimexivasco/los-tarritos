@@ -2,6 +2,9 @@ import { combine } from "@/utils/combineClassNames"
 import React from "react"
 import Button from "./button"
 import { DELETE_BTN_CLASSES, EDIT_BTN_CLASSES, SOLVE_BTN_CLASSES } from "@/utils/constants"
+import EditIcon from "@/public/icons/edit.svg"
+import TrashIcon from "@/public/icons/trash.svg"
+import CheckIcon from "@/public/icons/check.svg"
 
 interface BalanceItemProps {
   text: string
@@ -23,25 +26,26 @@ const BalanceItem = ({ text, isGood, isFromPreviousBalance, onRemove, onEdit, on
       className)}
     >
       <p>{text}</p>
-      <div className="grid gap-4">
-        <div className="flex gap-4">
+      <div className="grid gap-2">
+        <div className="flex gap-2">
           <Button
+            icon={<EditIcon className="w-4 h-4"/>}
             type="button"
-            text="Edit"
             className={EDIT_BTN_CLASSES}
             onClick={onEdit}
           />
           <Button
+            icon={<TrashIcon className="w-5 h-5"/>}
             type="button"
-            text="Delete"
             className={DELETE_BTN_CLASSES}
             onClick={onRemove}
           />
         </div>
         {isFromPreviousBalance && (
           <Button
+            icon={<CheckIcon className="w-5 h-5"/>}
             type="button"
-            text="SOLUCIONAO 👌"
+            text="SOLVED"
             className={SOLVE_BTN_CLASSES}
             onClick={onSolve}
           />

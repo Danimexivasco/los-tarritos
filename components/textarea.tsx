@@ -20,6 +20,7 @@ const TextArea = ({ required=false, placeholder, value, label, onChange, name, c
         name={name}
         placeholder={placeholder}
         value={value}
+        rows={3}
         onChange={onChange}
         className={combine("border-2 border-cyan-500/30 p-4 rounded focus:outline-none focus:border-cyan-500", className)}
       />
@@ -30,6 +31,7 @@ const TextArea = ({ required=false, placeholder, value, label, onChange, name, c
       name={name}
       placeholder={placeholder}
       value={value}
+      rows={3}
       onChange={onChange}
       className={combine("border-2 border-cyan-500/30 p-4 rounded focus:outline-none focus:border-cyan-500", className)}
     />

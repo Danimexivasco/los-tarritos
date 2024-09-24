@@ -9,6 +9,10 @@ import { BG_DONE, BG_TO_DO, DELETE_BTN_CLASSES, DONE_BTN_CLASSES, EDIT_BTN_CLASS
 import { formatDate } from "@/utils/formatDate"
 import { Timestamp } from "firebase/firestore"
 import Headline from "./headline"
+import CheckIcon from "@/public/icons/check.svg"
+import EditIcon from "@/public/icons/edit.svg"
+import TrashIcon from "@/public/icons/trash.svg"
+import RedoIcon from "@/public/icons/redo.svg"
 
 interface TopicItemProps {
   id?: string
@@ -39,14 +43,14 @@ const TopicItem = ({ id, title, description, status, updatedAt, createdAt, creat
         <div className="flex flex-col md:flex-row items-center gap-2 w-full md:w-auto">
           {(status === "To do") &&
             <Button
-              text="☑"
+              icon={<CheckIcon className="w-5 h-5"/>}
               className={DONE_BTN_CLASSES}
               onClick={() => updateTopic(id as string, { ...topic, status: "Done" })}
             />
           }
           {(status === "Done") &&
             <Button
-              text="🔄"
+              icon={<RedoIcon className="w-5 h-5"/>}
               className={REDO_BTN_CLASSES}
               onClick={() => updateTopic(id as string, { ...topic, status: "To do" })}
             />
@@ -54,12 +58,12 @@ const TopicItem = ({ id, title, description, status, updatedAt, createdAt, creat
           {id &&
           <>
             <Button
-              text="✏"
+              icon={<EditIcon className="w-5 h-5"/>}
               onClick={() => router.push(getPath("Edit Topic", id))}
               className={EDIT_BTN_CLASSES}
             />
             <Button
-              text="🗑"
+              icon={<TrashIcon className="w-5 h-5"/>}
               onClick={() => deleteTopic(id)}
               className={DELETE_BTN_CLASSES}
             />

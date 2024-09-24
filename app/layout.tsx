@@ -11,7 +11,7 @@ import Container from "@/components/container";
 const inter = Inter({ subsets: [ "latin" ] });
 
 export const metadata: Metadata = {
-  title: "Nuestros Tarritos 🏺",
+  title: "Nuestros Tarritos",
   description: "Una app canorranquica",
 };
 
