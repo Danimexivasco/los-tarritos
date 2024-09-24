@@ -3,7 +3,6 @@ export const ROUTES = [
   {
     name: "Home",
     path: "/",
-    onMenu: true
   },
   {
     name: "Random Activities",

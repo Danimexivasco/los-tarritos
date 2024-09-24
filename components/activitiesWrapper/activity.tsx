@@ -8,6 +8,10 @@ import { ACTIVITY_STATUS, DELETE_BTN_CLASSES, DONE_BTN_CLASSES, EDIT_BTN_CLASSES
 import { deleteActivity, updateActivity } from "@/services/activities"
 import { DocumentData } from "firebase/firestore"
 import { getPath } from "@/utils/getPath"
+import RedoIcon from "@/public/icons/redo.svg"
+import CheckIcon from "@/public/icons/check.svg"
+import EditIcon from "@/public/icons/edit.svg"
+import TrashIcon from "@/public/icons/trash.svg"
 
 export interface ActivityProps {
   key?: string
@@ -26,14 +30,14 @@ const ActivityItem = ({ activity, className }: ActivityProps) => {
       <div className="flex flex-col md:flex-row items-center gap-2 w-full md:w-auto">
         {(status === ACTIVITY_STATUS.DONE && id) &&
           <Button
-            text="🔄"
+            icon={<RedoIcon className="w-5 h-5"/>}
             className={REDO_BTN_CLASSES}
             onClick={() => updateActivity(id, { ...activity, status: ACTIVITY_STATUS.TO_DO })}
           />
         }
         {(status === ACTIVITY_STATUS.IN_PROGRESS && id) &&
           <Button
-            text="☑"
+            icon={<CheckIcon className="w-5 h-5"/>}
             className={DONE_BTN_CLASSES}
             onClick={() => updateActivity(id, { ...activity, status: ACTIVITY_STATUS.DONE })}
           />
@@ -41,12 +45,12 @@ const ActivityItem = ({ activity, className }: ActivityProps) => {
         {id &&
         <>
           <Button
-            text="✏"
+            icon={<EditIcon className="w-5 h-5"/>}
             onClick={() => router.push(getPath("Edit Activity", id))}
             className={EDIT_BTN_CLASSES}
           />
           <Button
-            text="🗑"
+            icon={<TrashIcon className="w-5 h-5"/>}
             onClick={() => deleteActivity(id)}
             className={DELETE_BTN_CLASSES}
           />

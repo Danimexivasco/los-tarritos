@@ -2,6 +2,20 @@ import { ROUTES } from "@/utils/routes";
 import { getPath } from "@/utils/getPath";
 import Link from "@/components/link";
 import Image from "next/image";
+import RandomIcon from "@/public/icons/random.svg"
+import BalanceIcon from "@/public/icons/balance.svg"
+import TalkIcon from "@/public/icons/talk.svg"
+
+const renderIcon = (icon: string) => {
+  switch (icon) {
+  case "Random Activities":
+    return <RandomIcon className="w-5 h-5 mr-2" />
+  case "Balances":
+    return <BalanceIcon className="w-5 h-5 mr-2" />
+  case "Topics":
+    return <TalkIcon className="w-5 h-5 mr-2" />
+  }
+}
 
 export default function Home() {
   return (
@@ -20,9 +34,10 @@ export default function Home() {
             asButton
             className="text-2xl text-center"
           >
+            {renderIcon(route.name)}
             {route.name}
-          </Link>)
-        }
+          </Link>
+        )}
       </div>
     </div>
   )

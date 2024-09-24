@@ -12,6 +12,7 @@ import Button from "@/components/button";
 import Link from "@/components/link";
 import { getPath } from "@/utils/getPath";
 import Headline from "../headline";
+import PlusIcon from "@/public/icons/plus.svg";
 
 const ActivitiesWrapper = ({}) => {
   const searchParams = useSearchParams()
@@ -102,12 +103,12 @@ const ActivitiesWrapper = ({}) => {
       <div className="grid gap-4 md:flex pt-6 ">
         <Link
           href={`${getPath("New Activity")}?activityType=${activeTab}`}
-          className={"bg-emerald-500 hover:bg-emerald-700 w-full flex items-center justify-center rounded p-4 text-white"}
-        >New Activity ➕</Link>
+          className={"font-bold bg-emerald-500 hover:bg-emerald-700 w-full flex items-center justify-center rounded p-4 text-white"}
+        ><PlusIcon className="w-5 h-5 mr-2"/>New Activity</Link>
         <Button
-          text="Random Activity 🧙🏼‍♂️"
+          text="🧙🏼‍♂️ Random Activity"
           disabled={(getActivitiesByType()?.filter(activity => (activity.type === activeTab && activity.status === ACTIVITY_STATUS.IN_PROGRESS))?.length ?? 1) > 0}
-          className={"bg-amber-700 hover:bg-amber-900"}
+          className={"font-bold !bg-amber-700 hover:!bg-amber-900"}
           onClick={getRandomActivity}
         />
       </div>

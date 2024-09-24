@@ -7,6 +7,7 @@ import { Topic } from "@/types"
 import TopicItem from "./topicItem"
 import { TOPIC_STATUS } from "@/utils/constants"
 import Headline from "./headline"
+import PlusIcon from "@/public/icons/plus.svg"
 
 const TopicList = ({}) => {
   const [ topicsByStatus, setTopicsByStatus ] = useState(null)
@@ -34,26 +35,36 @@ const TopicList = ({}) => {
     return (
       <>
         <p className=" mb-4">Ooops... There are no topics yet</p>
-        <Link href={getPath("New Topic")} asButton className="max-w-96">Create first topic</Link>
+        <Link
+          href={getPath("New Topic")}
+          asButton
+          className={"font-bold bg-emerald-500 hover:bg-emerald-700 w-full flex items-center justify-center rounded p-4 text-white my-8"}
+        ><PlusIcon className="w-5 h-5 mr-2"/> Create first topic</Link>
       </>
     )
   }
   return topicsByStatus && (
-    Object.entries(topicsByStatus)
-      ?.sort(([ statusA ], [ statusB ]) =>
-        TOPIC_STATUS.indexOf(statusA as "To do" | "Done") - TOPIC_STATUS.indexOf(statusB as "To do" | "Done"))
-      ?.map(([ status, topics ]) => {
-        const topicsArray = topics as Topic[];
-        return (
-          <div key={status} className="mb-8">
-            <Headline as="h2" classname="font-bold text-lg leading-9">{status}</Headline>
-            <hr className="border-cyan-500/40 pb-6"/>
-            <ul className="grid gap-2">
-              {topicsArray?.map((topic: Topic) => <TopicItem key={topic.id} {...topic}/>)}
-            </ul>
-          </div>
-        )
-      })
+    <>
+      <Link
+        href={`${getPath("New Topic")}`}
+        className={"font-bold bg-emerald-500 hover:bg-emerald-700 w-full flex items-center justify-center rounded p-4 text-white my-8"}
+      ><PlusIcon className="w-5 h-5 mr-2"/>NEW TOPIC</Link>
+      {Object.entries(topicsByStatus)
+        ?.sort(([ statusA ], [ statusB ]) =>
+          TOPIC_STATUS.indexOf(statusA as "To do" | "Done") - TOPIC_STATUS.indexOf(statusB as "To do" | "Done"))
+        ?.map(([ status, topics ]) => {
+          const topicsArray = topics as Topic[];
+          return (
+            <div key={status} className="mb-8">
+              <Headline as="h2" classname="font-bold text-lg leading-9">{status}</Headline>
+              <hr className="border-cyan-500/40 pb-6"/>
+              <ul className="grid gap-2">
+                {topicsArray?.map((topic: Topic) => <TopicItem key={topic.id} {...topic}/>)}
+              </ul>
+            </div>
+          )
+        })}
+    </>
   )
 }
 
