@@ -45,14 +45,14 @@ const TopicItem = ({ id, title, description, status, updatedAt, createdAt, creat
             <Button
               icon={<CheckIcon className="w-5 h-5"/>}
               className={DONE_BTN_CLASSES}
-              onClick={() => updateTopic(id as string, { ...topic, status: "Done" })}
+              onClick={() => updateTopic(id as string, { ...topic, status: "Done", updatedAt: new Date() })}
             />
           }
           {(status === "Done") &&
             <Button
               icon={<RedoIcon className="w-5 h-5"/>}
               className={REDO_BTN_CLASSES}
-              onClick={() => updateTopic(id as string, { ...topic, status: "To do" })}
+              onClick={() => updateTopic(id as string, { ...topic, status: "To do", updatedAt: new Date() })}
             />
           }
           {id &&
