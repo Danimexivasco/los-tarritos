@@ -40,7 +40,7 @@ const TopicItem = ({ id, title, description, status, updatedAt, createdAt, creat
           <Headline as="h3" classname="text-lg font-bold">{title}</Headline>
           <p className="line-clamp-2">{description}</p>
         </div>
-        <div className="flex flex-col md:flex-row items-center gap-2 w-full md:w-auto">
+        <div className="flex items-center gap-2 w-full md:w-auto">
           {(status === "To do") &&
             <Button
               icon={<CheckIcon className="w-5 h-5"/>}
