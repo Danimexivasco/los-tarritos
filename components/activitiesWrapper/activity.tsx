@@ -27,7 +27,7 @@ const ActivityItem = ({ activity, className }: ActivityProps) => {
       <div className="flex gap-2">
         <p><>{text}</></p>
       </div>
-      <div className="flex flex-col md:flex-row items-center gap-2 w-full md:w-auto">
+      <div className="flex items-center gap-2 w-full md:w-auto">
         {(status === ACTIVITY_STATUS.DONE && id) &&
           <Button
             icon={<RedoIcon className="w-5 h-5"/>}
