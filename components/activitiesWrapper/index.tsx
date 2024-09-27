@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation"
 import { useAuthState } from "@/services/auth";
 import { updateActivity, useActivitiesData } from "@/services/activities";
 import { combine } from "@/utils/combineClassNames";
-import { ACTIVE_TAB_CLASSES, ACTIVITY_STATUS, ACTIVITY_TYPES, BG_DONE, BG_IN_PROGRESS, BG_TO_DO, GENERAL_TAB_CLASSES, INACTIVE_TAB_CLASSES } from "@/utils/constants";
+import { ACTIVE_TAB_CLASSES, ACTIVITY_STATUS, ACTIVITY_TYPES, BG_DONE, BG_IN_PROGRESS, BG_TO_DO, GENERAL_TAB_CLASSES, INACTIVE_TAB_CLASSES, ITEMS_GAP } from "@/utils/constants";
 import { showMsg } from "@/utils/showMessage";
 import ActivityItem from "./activity";
 import Button from "@/components/button";
@@ -121,7 +121,7 @@ const ActivitiesWrapper = ({}) => {
               <div>
                 <Headline as="h2" classname="font-bold text-lg leading-9">In Progress</Headline>
                 <hr className="border-cyan-500/40 pb-6"/>
-                <div className="grid gap-2">
+                <div className={combine("grid", ITEMS_GAP)}>
                   {getActivitiesByType()?.filter(activity => activity.status === ACTIVITY_STATUS.IN_PROGRESS).map(activity =>
                     <ActivityItem key={activity.id} activity={activity} className={BG_IN_PROGRESS}/>
                   )}
@@ -132,7 +132,7 @@ const ActivitiesWrapper = ({}) => {
               <div>
                 <Headline as="h2" classname="font-bold text-lg leading-9">To do</Headline>
                 <hr className="border-cyan-500/40 pb-6"/>
-                <div className="grid gap-2">
+                <div className={combine("grid", ITEMS_GAP)}>
                   {getActivitiesByType()?.filter(activity => activity.status === ACTIVITY_STATUS.TO_DO).map(activity =>
                     <ActivityItem key={activity.id} activity={activity} className={BG_TO_DO}/>
                   )}
@@ -143,7 +143,7 @@ const ActivitiesWrapper = ({}) => {
               <div>
                 <Headline as="h2" classname="font-bold text-lg leading-9">Done</Headline>
                 <hr className="border-cyan-500/40 pb-6"/>
-                <div className="grid gap-2">
+                <div className={combine("grid", ITEMS_GAP)}>
                   {getActivitiesByType()?.filter(activity => activity.status === ACTIVITY_STATUS.DONE)?.map(activity =>
                     <ActivityItem key={activity.id} activity={activity} className={BG_DONE}/>
                   )}
