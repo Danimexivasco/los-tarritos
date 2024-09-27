@@ -5,9 +5,10 @@ import Link from "./link"
 import { getPath } from "@/utils/getPath"
 import { Topic } from "@/types"
 import TopicItem from "./topicItem"
-import { TOPIC_STATUS } from "@/utils/constants"
+import { ITEMS_GAP, TOPIC_STATUS } from "@/utils/constants"
 import Headline from "./headline"
 import PlusIcon from "@/public/icons/plus.svg"
+import { combine } from "@/utils/combineClassNames"
 
 const TopicList = ({}) => {
   const [ topicsByStatus, setTopicsByStatus ] = useState(null)
@@ -58,7 +59,7 @@ const TopicList = ({}) => {
             <div key={status} className="mb-8">
               <Headline as="h2" classname="font-bold text-lg leading-9">{status}</Headline>
               <hr className="border-cyan-500/40 pb-6"/>
-              <ul className="grid gap-2">
+              <ul className={combine("grid", ITEMS_GAP)}>
                 {topicsArray?.map((topic: Topic) => <TopicItem key={topic.id} {...topic}/>)}
               </ul>
             </div>

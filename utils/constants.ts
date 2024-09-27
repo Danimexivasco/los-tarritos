@@ -78,3 +78,4 @@ export const HEADLINE_CLASSES = {
   h5: "text-lg",
   h6: "text-md",
 }
+export const ITEMS_GAP = "gap-4"
