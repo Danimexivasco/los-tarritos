@@ -9,6 +9,8 @@ import { formatDate } from "@/utils/formatDate"
 import { getDate } from "@/utils/getDate"
 import Headline from "./headline"
 import PlusIcon from "@/public/icons/plus.svg"
+import { combine } from "@/utils/combineClassNames"
+import { ITEMS_GAP } from "@/utils/constants"
 
 const BalancesList = ({}) => {
   const [ balances, loading, error, snapshot ] = useBalancesData()
@@ -83,7 +85,7 @@ const BalancesList = ({}) => {
           <div key={key} data-key={key} className="my-10">
             <Headline as="h2" classname="font-bold text-lg">{key}</Headline>
             <hr className="border-cyan-500/40 pb-6"/>
-            <ul className="grid gap-4 md:grid-cols-3">
+            <ul className={combine("grid md:grid-cols-3", ITEMS_GAP)}>
               {items
                 ?.sort((item1: Balance, item2: Balance) => (getDate(item2.date)?.getTime() ?? 2) - (getDate(item1.date)?.getTime() ?? 1))
                 ?.map((balance: Balance) => {
