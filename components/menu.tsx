@@ -35,7 +35,7 @@ const Menu = ({ isOpen, setOpen }: MenuProps) => {
         <nav className="px-5 py-10 bg-white" onClick={e => e.stopPropagation()}>
           <ul className="space-y-4">
             {ROUTES.filter(route => route.onMenu).map((route) => (
-              <li key={route.name} onClick={() => setOpen(false)}>
+              <li key={route.name} onClick={() => setOpen(false)} className="w-fit">
                 <Link href={route.path} className="text-2xl hover:text-cyan-400">{route.name}</Link>
               </li>
             ))}
