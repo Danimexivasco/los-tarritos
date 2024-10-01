@@ -2,7 +2,7 @@ import { useRouter } from "next/navigation"
 import { logOut, useAuthState } from "@/services/auth"
 import { AUTH_ROUTES, ROUTES } from "@/utils/routes"
 import { combine } from "@/utils/combineClassNames"
-import { MENU_CLASSES } from "@/utils/constants"
+import { MENU_CLASSES, MENU_COORDS_CLOSED, MENU_COORDS_OPEN } from "@/utils/constants"
 import React from "react"
 import Link from "./link"
 import Button from "./button"
@@ -28,7 +28,7 @@ const Menu = ({ isOpen, setOpen }: MenuProps) => {
   }
 
   return (
-    <div className={MENU_CLASSES}>
+    <div className={combine(MENU_CLASSES, `${isOpen ? "visible" : "invisible"}` )}>
       <div
         className={combine(
           "w-100 h-[100vh] bg-black transition-all duration-500 ease-in-out",
@@ -40,7 +40,7 @@ const Menu = ({ isOpen, setOpen }: MenuProps) => {
           className={combine(
             MENU_CLASSES,
             "px-5 py-10 bg-white transition-all duration-500 ease-in-out",
-            `${isOpen ? "top-[56px] md:top-[64px]" : "top-[-105vh]"}`)}
+            `${isOpen ? MENU_COORDS_OPEN : MENU_COORDS_CLOSED}`)}
           onClick={e => e.stopPropagation()}
         >
           <ul className="space-y-4">
