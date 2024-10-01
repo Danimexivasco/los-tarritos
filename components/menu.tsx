@@ -28,14 +28,24 @@ const Menu = ({ isOpen, setOpen }: MenuProps) => {
   }
 
   return (
-    <div
-      className={combine(MENU_CLASSES, `${isOpen ? "top-[56px] md:top-[64px] no-doc-scroll" : "top-[-105vh]"}`)}
-    >
-      <div className=" w-100 h-[100vh] bg-black bg-opacity-75" onClick={handleOutsideClick}>
-        <nav className="px-5 py-10 bg-white" onClick={e => e.stopPropagation()}>
+    <div className={MENU_CLASSES}>
+      <div
+        className={combine(
+          "w-100 h-[100vh] bg-black transition-all duration-500 ease-in-out",
+          `${isOpen ? "no-doc-scroll bg-opacity-75" : "bg-opacity-0"}`
+        )}
+        onClick={handleOutsideClick}
+      >
+        <nav
+          className={combine(
+            MENU_CLASSES,
+            "px-5 py-10 bg-white transition-all duration-500 ease-in-out",
+            `${isOpen ? "top-[56px] md:top-[64px]" : "top-[-105vh]"}`)}
+          onClick={e => e.stopPropagation()}
+        >
           <ul className="space-y-4">
             {ROUTES.filter(route => route.onMenu).map((route) => (
-              <li key={route.name} onClick={() => setOpen(false)}>
+              <li key={route.name} onClick={() => setOpen(false)} className="w-fit">
                 <Link href={route.path} className="text-2xl hover:text-cyan-400">{route.name}</Link>
               </li>
             ))}
