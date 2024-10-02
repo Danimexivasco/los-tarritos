@@ -43,3 +43,17 @@ export interface Balance {
 export interface YearlyBalances {
   [key: number]: Array<Balance>
 }
+
+export interface Recipe {
+  id?: string
+  title: string
+  url: string
+  time: number
+  tags: Array<string>
+  ingredients?: Array<string>
+  dificulty: "easy" | "medium" | "hard"
+  instructions: Array<string>
+  updatedAt?: Date
+  createdAt: Date
+  createdBy: string
+}
