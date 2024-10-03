@@ -5,6 +5,7 @@ import Image from "next/image";
 import RandomIcon from "@/public/icons/random.svg"
 import BalanceIcon from "@/public/icons/balance.svg"
 import TalkIcon from "@/public/icons/talk.svg"
+import ChefIcon from "@/public/icons/chef.svg"
 
 const renderIcon = (icon: string) => {
   switch (icon) {
@@ -13,7 +14,9 @@ const renderIcon = (icon: string) => {
   case "Balances":
     return <BalanceIcon className="w-5 h-5 mr-2" />
   case "Topics":
-    return <TalkIcon className="w-5 h-5 mr-2" />
+    return <TalkIcon className="w-6 h-6 mr-2" />
+  case "Recipes":
+    return <ChefIcon className="w-6 h-6 mr-2" />
   }
 }
 
