@@ -49,6 +49,63 @@ export const BALANCE_INPUTS = [
 ]
 export const INITIAL_POINT_VALUES = { id: null, text: "" }
 
+// Recipes
+const RECIPE_DIFICULTIES = [ "Easy", "Medium", "Hard" ]
+export const RECIPES_INPUTS = [
+  {
+    name: "title",
+    type: "text",
+    label: "Title",
+    placeholder: "I.e. Pasta Cacio e Pepe",
+    required: true
+  },
+  {
+    name: "dificulty",
+    type: "select",
+    label: "Difficulty",
+    options: RECIPE_DIFICULTIES.map(dificulty => ({ value: dificulty, label: dificulty })),
+    placeholder: "Select the difficulty..."
+  },
+  {
+    name: "tags",
+    type: "multiple",
+    label: "Tags",
+    placeholder: "List the tags separated by commas...",
+    btnText: "Add tag"
+  },
+  {
+    name: "ingredients",
+    type: "textarea",
+    label: "Ingredients",
+    placeholder: "List the ingredients here",
+    btnText: "Add ingredient"
+  },
+  {
+    name: "url",
+    type: "url",
+    label: "URL",
+    placeholder: "Enter a URL for the recipe..."
+  },
+  {
+    name: "time",
+    type: "number",
+    label: "Time",
+    placeholder: "Enter the cooking time in minutes..."
+  },
+  {
+    name: "instructions",
+    type: "textarea",
+    label: "Instructions",
+    placeholder: "Enter the cooking instructions..."
+  },
+  {
+    name: "tips",
+    type: "textarea",
+    label: "Tips",
+    placeholder: "Enter the cooking tips..."
+  }
+]
+
 
 // Tailwind Classes
 export const ACTIVE_TAB_CLASSES = "bg-cyan-500 text-white shadow-md shadow-white";
