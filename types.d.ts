@@ -47,12 +47,12 @@ export interface YearlyBalances {
 export interface Recipe {
   id?: string
   title: string
-  url: string
-  time: number
-  tags: Array<string>
-  ingredients?: Array<string>
-  dificulty: "easy" | "medium" | "hard"
-  instructions: Array<string>
+  url?: string
+  time?: number | null
+  tags?: string
+  ingredients?: string
+  dificulty: "Easy" | "Medium" | "Hard"
+  instructions?: string
   updatedAt?: Date
   createdAt: Date
   createdBy: string
