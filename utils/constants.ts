@@ -49,6 +49,91 @@ export const BALANCE_INPUTS = [
 ]
 export const INITIAL_POINT_VALUES = { id: null, text: "" }
 
+// Recipes
+export const RECIPE_DIFFICULTIES = [ "Easy", "Medium", "Hard" ] as const
+export const RECIPES_INPUTS = [
+  {
+    name: "title",
+    type: "text",
+    label: "Title",
+    placeholder: "I.e. Pasta Cacio e Pepe",
+    required: true
+  },
+  {
+    name: "difficulty",
+    type: "select",
+    label: "Difficulty",
+    options: RECIPE_DIFFICULTIES.map(difficulty => ({ value: difficulty, label: difficulty })),
+    placeholder: "Select the difficulty..."
+  },
+  {
+    name: "tags",
+    type: "multiple",
+    label: "Tags",
+    placeholder: "List the tags separated by commas...",
+    btnText: "Add tag"
+  },
+  {
+    name: "ingredients",
+    type: "textarea",
+    label: "Ingredients",
+    placeholder: "List the ingredients here",
+    btnText: "Add ingredient"
+  },
+  {
+    name: "url",
+    type: "url",
+    label: "URL",
+    placeholder: "Enter a URL for the recipe..."
+  },
+  {
+    name: "time",
+    type: "number",
+    label: "Time",
+    placeholder: "Enter the cooking time in minutes..."
+  },
+  {
+    name: "instructions",
+    type: "textarea",
+    label: "Instructions",
+    placeholder: "Enter the cooking instructions..."
+  },
+  {
+    name: "tips",
+    type: "textarea",
+    label: "Tips",
+    placeholder: "Enter the cooking tips..."
+  }
+]
+
+export const RECIPES_FILTERS = [
+  {
+    name: "search",
+    type: "text",
+    label: "Search",
+    placeholder: "Search for something..."
+  },
+  {
+    name: "time",
+    type: "number",
+    label: "Time",
+    placeholder: "Enter the maximun cooking time in minutes..."
+  },
+  {
+    name: "difficulty",
+    type: "select",
+    label: "Difficulty",
+    options: [ { value: "", label: "All" }, ...RECIPE_DIFFICULTIES.map(difficulty => ({ value: difficulty, label: difficulty })) ],
+    placeholder: "Select the difficulty..."
+  },
+]
+
+export const INITIAL_RECIPES_FILTERS_VALUES = {
+  search: "",
+  time: "",
+  difficulty: ""
+}
+
 
 // Tailwind Classes
 export const ACTIVE_TAB_CLASSES = "bg-cyan-500 text-white shadow-md shadow-white";
@@ -72,6 +157,9 @@ export const BG_DONE = "bg-purple-800/35"
 export const NEUTRAL_CARD_CLASSES = "border-cyan-500/40 hover:border-cyan-500 color-cyan rounded hover:cursor-pointer border-2 p-4 flex flex-col gap-16  h-full"
 export const POSITIVE_CARD_CLASSES = "border-emerald-500/60 hover:border-emerald-500 text-emerald-500"
 export const NEGATIVE_CARD_CLASSES = "border-red-500/40 hover:border-red-500 text-red-500"
+export const EASY_RECIPE_CARD_CLASSES = POSITIVE_CARD_CLASSES
+export const MEDIUM_RECIPE_CARD_CLASSES = "border-amber-500/60 hover:border-amber-500 text-amber-500"
+export const HARD_RECIPE_CARD_CLASSES = NEGATIVE_CARD_CLASSES
 export const HEADLINE_CLASSES = {
   h1: "text-4xl uppercase",
   h2: "text-3xl uppercase",

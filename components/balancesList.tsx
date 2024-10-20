@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react"
 import Link from "./link"
 import { getPath } from "@/utils/getPath"
 import { Balance, YearlyBalances } from "@/types"
-import Card from "./card"
+import BalanceCard from "./cards/balanceCard"
 import { formatDate } from "@/utils/formatDate"
 import { getDate } from "@/utils/getDate"
 import Headline from "./headline"
@@ -62,7 +62,6 @@ const BalancesList = ({}) => {
 
   if (loading) {
     <p>Loading...</p>
-    
   }
   return balances?.length <= 0 ? (
     <>
@@ -95,7 +94,7 @@ const BalancesList = ({}) => {
                   const isPositive = balance.points.good.length > balance.points.bad.length
                   const isNegative = balance.points.good.length < balance.points.bad.length
                   return (
-                    <Card
+                    <BalanceCard
                       key={balance.id}
                       title={title ?? ""}
                       href={getPath("Edit Balance", balance.id)}
