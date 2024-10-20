@@ -51,9 +51,15 @@ export interface Recipe {
   time?: number | null
   tags?: string
   ingredients?: string
-  dificulty: "Easy" | "Medium" | "Hard"
+  difficulty: "Easy" | "Medium" | "Hard"
   instructions?: string
   updatedAt?: Date
   createdAt: Date
   createdBy: string
+}
+
+export interface RecipesFilters {
+  search: string
+  time: string
+  difficulty: string
 }
