@@ -7,7 +7,7 @@ interface TagProps {
 }
 const Tag = ({ text, className }: TagProps) => {
   return (
-    <div className={combine("bg-cyan-500 text-white px-2.5 py-1 rounded-lg", className)}>
+    <div className={combine("bg-cyan-500 text-white text-sm px-2.5 py-1 rounded-lg", className)}>
       {text}
     </div>
   )

@@ -1,7 +1,7 @@
 import React from "react"
 import { formatDate } from "@/utils/formatDate"
 import { combine } from "@/utils/combineClassNames"
-import { NEGATIVE_CARD_CLASSES, NEUTRAL_CARD_CLASSES, POSITIVE_CARD_CLASSES } from "@/utils/constants"
+import { HARD_RECIPE_CARD_CLASSES, NEUTRAL_CARD_CLASSES, EASY_RECIPE_CARD_CLASSES, MEDIUM_RECIPE_CARD_CLASSES } from "@/utils/constants"
 import Headline from "../headline"
 import Link from "../link"
 import Tag from "../tag"
@@ -12,34 +12,35 @@ interface CardProps {
   href?: string
   className?: string
   tags?: string
-  dificulty: "Easy" | "Medium" | "Hard"
+  difficulty: "Easy" | "Medium" | "Hard"
   url?: string
-  time: number
+  time?: number | null
   createdAt?: Date
 }
 
 interface CardContentProps {
   title: string
   tags?: Array<string>
-  dificulty: "Easy" | "Medium" | "Hard"
+  difficulty: "Easy" | "Medium" | "Hard"
   url?: string
-  time: number
+  time?: number | null
   createdAt?: Date
 }
 
-const CardContent = ({ title, tags, url, dificulty, time, createdAt }: CardContentProps) => (
+const CardContent = ({ title, tags, url, difficulty, time, createdAt }: CardContentProps) => (
   <>
     <div className="flex-1">
-      <Headline as="h3" classname="capitalize mb-4 ">{title}</Headline>
-      <div className="flex gap-2">
+      <Headline as="h3" classname="first-letter:capitalize mb-4 ">{title}</Headline>
+      <div className="flex gap-2 flex-wrap">
         {tags && tags.length > 0 && (
           tags.map(tag => (
             <Tag
               key={tag}
               text={tag}
               className={combine(
-                dificulty === "Easy" && "bg-emerald-500",
-                dificulty === "Hard" && "bg-red-500",
+                difficulty === "Easy" && "bg-emerald-500",
+                difficulty === "Medium" && "bg-amber-500",
+                difficulty === "Hard" && "bg-red-500",
               )}
             />
           ))
@@ -47,7 +48,7 @@ const CardContent = ({ title, tags, url, dificulty, time, createdAt }: CardConte
       </div>
     </div>
     <div>
-      <div className="flex justify-between gap-6 items-center">
+      <div className="flex justify-between gap-2 items-center">
         <i className="text-xs">Created at: {formatDate(createdAt as Date)}</i>
         {time && (
           <div className="flex gap-1 items-center">
@@ -59,24 +60,27 @@ const CardContent = ({ title, tags, url, dificulty, time, createdAt }: CardConte
       {url && (
         <div onClick={(e) => e.stopPropagation()} className="mt-4">
           <Link href={url} external asButton className={combine(
-            dificulty === "Easy" && "bg-emerald-500 hover:bg-emerald-500/80",
-            dificulty === "Hard" && "bg-red-500 hover:bg-red-500/80",
+            difficulty === "Easy" && "bg-emerald-500 hover:bg-emerald-500/80",
+            difficulty === "Medium" && "bg-amber-500 hover:bg-amber-500/80",
+            difficulty === "Hard" && "bg-red-500 hover:bg-red-500/80",
           )}>Visit Recipe</Link>
         </div>
       )}
     </div>
   </>
 )
-const Card = ({ title, href, dificulty, tags, url, time, createdAt, className }: CardProps) => {
-  const mapedTags = tags?.split(",").map(el => el.trim()) ?? []
+const Card = ({ title, href, difficulty, tags, url, time, createdAt, className }: CardProps) => {
+  const mapedTags = tags?.split(",")?.map(el => el.trim()).filter(Boolean) ?? []
+  
   return href ?(
     <li>
       <Link
         href={href}
         className={combine(
           NEUTRAL_CARD_CLASSES,
-          dificulty === "Easy" && POSITIVE_CARD_CLASSES,
-          dificulty === "Hard" && NEGATIVE_CARD_CLASSES,
+          difficulty === "Easy" && EASY_RECIPE_CARD_CLASSES,
+          difficulty === "Medium" && MEDIUM_RECIPE_CARD_CLASSES,
+          difficulty === "Hard" && HARD_RECIPE_CARD_CLASSES,
           className
         )}
       >
@@ -84,7 +88,7 @@ const Card = ({ title, href, dificulty, tags, url, time, createdAt, className }:
           title={title}
           tags={mapedTags}
           url={url}
-          dificulty={dificulty}
+          difficulty={difficulty}
           time={time}
           createdAt={createdAt}
         />
@@ -93,15 +97,16 @@ const Card = ({ title, href, dificulty, tags, url, time, createdAt, className }:
   ) : (
     <li className={combine(
       NEUTRAL_CARD_CLASSES,
-      dificulty === "Easy" && POSITIVE_CARD_CLASSES,
-      dificulty === "Hard" && NEGATIVE_CARD_CLASSES,
+      difficulty === "Easy" && EASY_RECIPE_CARD_CLASSES,
+      difficulty === "Medium" && MEDIUM_RECIPE_CARD_CLASSES,
+      difficulty === "Hard" && HARD_RECIPE_CARD_CLASSES,
       className
     )}>
       <CardContent
         title={title}
         tags={mapedTags}
         url={url}
-        dificulty={dificulty}
+        difficulty={difficulty}
         time={time}
         createdAt={createdAt}
       />
