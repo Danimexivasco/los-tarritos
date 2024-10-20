@@ -2,7 +2,7 @@ import React from "react"
 import { formatDate } from "@/utils/formatDate"
 import { Points } from "@/types"
 import { combine } from "@/utils/combineClassNames"
-import { NEGATIVE_CARD_CLASSES, NEUTRAL_CARD_CLASSES, POSITIVE_CARD_CLASSES } from "@/utils/constants"
+import { CARD_CLASSES, NEGATIVE_CARD_CLASSES, NEUTRAL_CARD_CLASSES, POSITIVE_CARD_CLASSES } from "@/utils/constants"
 import Headline from "../headline"
 import Link from "../link"
 
@@ -47,6 +47,7 @@ const BalanceCard = ({ title, description, href, isBalance, points, createdAt, i
       <Link
         href={href}
         className={combine(
+          CARD_CLASSES,
           NEUTRAL_CARD_CLASSES,
           isPositive && POSITIVE_CARD_CLASSES,
           isNegative && NEGATIVE_CARD_CLASSES,
@@ -64,6 +65,7 @@ const BalanceCard = ({ title, description, href, isBalance, points, createdAt, i
     </li>
   ) : (
     <li className={combine(
+      CARD_CLASSES,
       NEUTRAL_CARD_CLASSES,
       isPositive && POSITIVE_CARD_CLASSES,
       isNegative && NEGATIVE_CARD_CLASSES,

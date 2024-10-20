@@ -1,7 +1,7 @@
 import React from "react"
 import { formatDate } from "@/utils/formatDate"
 import { combine } from "@/utils/combineClassNames"
-import { HARD_RECIPE_CARD_CLASSES, NEUTRAL_CARD_CLASSES, EASY_RECIPE_CARD_CLASSES, MEDIUM_RECIPE_CARD_CLASSES } from "@/utils/constants"
+import { HARD_RECIPE_CARD_CLASSES, CARD_CLASSES, EASY_RECIPE_CARD_CLASSES, MEDIUM_RECIPE_CARD_CLASSES } from "@/utils/constants"
 import Headline from "../headline"
 import Link from "../link"
 import Tag from "../tag"
@@ -30,7 +30,7 @@ interface CardContentProps {
 const CardContent = ({ title, tags, url, difficulty, time, createdAt }: CardContentProps) => (
   <>
     <div className="flex-1">
-      <Headline as="h3" classname="first-letter:capitalize mb-4 ">{title}</Headline>
+      <Headline as="h3" classname="first-letter:capitalize mb-4">{title}</Headline>
       <div className="flex gap-2 flex-wrap">
         {tags && tags.length > 0 && (
           tags.map(tag => (
@@ -39,7 +39,7 @@ const CardContent = ({ title, tags, url, difficulty, time, createdAt }: CardCont
               text={tag}
               className={combine(
                 difficulty === "Easy" && "bg-emerald-500",
-                difficulty === "Medium" && "bg-amber-500",
+                difficulty === "Medium" && "!bg-amber-500",
                 difficulty === "Hard" && "bg-red-500",
               )}
             />
@@ -61,7 +61,7 @@ const CardContent = ({ title, tags, url, difficulty, time, createdAt }: CardCont
         <div onClick={(e) => e.stopPropagation()} className="mt-4">
           <Link href={url} external asButton className={combine(
             difficulty === "Easy" && "bg-emerald-500 hover:bg-emerald-500/80",
-            difficulty === "Medium" && "bg-amber-500 hover:bg-amber-500/80",
+            difficulty === "Medium" && "!bg-amber-500 hover:!bg-amber-500/80",
             difficulty === "Hard" && "bg-red-500 hover:bg-red-500/80",
           )}>Visit Recipe</Link>
         </div>
@@ -77,7 +77,7 @@ const Card = ({ title, href, difficulty, tags, url, time, createdAt, className }
       <Link
         href={href}
         className={combine(
-          NEUTRAL_CARD_CLASSES,
+          CARD_CLASSES,
           difficulty === "Easy" && EASY_RECIPE_CARD_CLASSES,
           difficulty === "Medium" && MEDIUM_RECIPE_CARD_CLASSES,
           difficulty === "Hard" && HARD_RECIPE_CARD_CLASSES,
@@ -96,7 +96,7 @@ const Card = ({ title, href, difficulty, tags, url, time, createdAt, className }
     </li>
   ) : (
     <li className={combine(
-      NEUTRAL_CARD_CLASSES,
+      CARD_CLASSES,
       difficulty === "Easy" && EASY_RECIPE_CARD_CLASSES,
       difficulty === "Medium" && MEDIUM_RECIPE_CARD_CLASSES,
       difficulty === "Hard" && HARD_RECIPE_CARD_CLASSES,

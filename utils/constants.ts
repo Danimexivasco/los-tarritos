@@ -154,11 +154,12 @@ export const DONE_BTN_CLASSES = "bg-green-500 hover:bg-green-700 shadow-slate-40
 export const BG_TO_DO = "bg-emerald-500/35"
 export const BG_IN_PROGRESS = "bg-amber-500/35"
 export const BG_DONE = "bg-purple-800/35"
-export const NEUTRAL_CARD_CLASSES = "border-cyan-500/40 hover:border-cyan-500 color-cyan rounded hover:cursor-pointer border-2 p-4 flex flex-col gap-16  h-full"
+export const CARD_CLASSES = "rounded hover:cursor-pointer border-2 p-4 flex flex-col gap-16 h-full"
+export const NEUTRAL_CARD_CLASSES = "border-cyan-500/40 hover:border-cyan-500 color-cyan"
 export const POSITIVE_CARD_CLASSES = "border-emerald-500/60 hover:border-emerald-500 text-emerald-500"
 export const NEGATIVE_CARD_CLASSES = "border-red-500/40 hover:border-red-500 text-red-500"
 export const EASY_RECIPE_CARD_CLASSES = POSITIVE_CARD_CLASSES
-export const MEDIUM_RECIPE_CARD_CLASSES = "border-amber-500/60 hover:border-amber-500 text-amber-500"
+export const MEDIUM_RECIPE_CARD_CLASSES = "!border-amber-500/60 hover:!border-amber-500 !text-amber-500"
 export const HARD_RECIPE_CARD_CLASSES = NEGATIVE_CARD_CLASSES
 export const HEADLINE_CLASSES = {
   h1: "text-4xl uppercase",
