@@ -43,3 +43,23 @@ export interface Balance {
 export interface YearlyBalances {
   [key: number]: Array<Balance>
 }
+
+export interface Recipe {
+  id?: string
+  title: string
+  url?: string
+  time?: number | null
+  tags?: string
+  ingredients?: string
+  difficulty: "Easy" | "Medium" | "Hard"
+  instructions?: string
+  updatedAt?: Date
+  createdAt: Date
+  createdBy: string
+}
+
+export interface RecipesFilters {
+  search: string
+  time: string
+  difficulty: string
+}

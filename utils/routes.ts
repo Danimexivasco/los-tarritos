@@ -42,6 +42,19 @@ export const ROUTES = [
   {
     name: "Edit Topic",
     path: "/topics/:id",
+  },
+  {
+    name: "Recipes",
+    path: "/recipes",
+    onMenu: true
+  },
+  {
+    name: "New Recipe",
+    path: "/recipes/new",
+  },
+  {
+    name: "Edit Recipe",
+    path: "/recipes/:id",
   }
 ]
 

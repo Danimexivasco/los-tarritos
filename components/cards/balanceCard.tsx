@@ -1,10 +1,10 @@
 import React from "react"
-import Link from "./link"
 import { formatDate } from "@/utils/formatDate"
 import { Points } from "@/types"
 import { combine } from "@/utils/combineClassNames"
 import { NEGATIVE_CARD_CLASSES, NEUTRAL_CARD_CLASSES, POSITIVE_CARD_CLASSES } from "@/utils/constants"
-import Headline from "./headline"
+import Headline from "../headline"
+import Link from "../link"
 
 interface CardProps {
   title: string
@@ -41,7 +41,7 @@ const CardContent = ({ title, description, isBalance, points, createdAt }: CardP
     )}
   </>
 )
-const Card = ({ title, description, href, isBalance, points, createdAt, isPositive, isNegative, className }: CardProps) => {
+const BalanceCard = ({ title, description, href, isBalance, points, createdAt, isPositive, isNegative, className }: CardProps) => {
   return href ?(
     <li>
       <Link
@@ -80,4 +80,4 @@ const Card = ({ title, description, href, isBalance, points, createdAt, isPositi
   )
 }
 
-export default Card
+export default BalanceCard
