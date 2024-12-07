@@ -5,7 +5,6 @@ import { renderFormFields } from "@/utils/renderFormFields"
 import { UserContext } from "./protectedRoute"
 import { Balance, Point } from "@/types"
 import { createBalance, deleteBalance, updateBalance, useSingleBalanceData } from "@/services/balances"
-import Input from "./input"
 import Button from "./button"
 import BalanceItem from "./balanceItem"
 import Link from "./link"
@@ -19,6 +18,7 @@ import { combine } from "@/utils/combineClassNames"
 import Headline from "./headline"
 import TrashIcon from "@/public/icons/trash.svg"
 import PlusIcon from "@/public/icons/plus.svg"
+import TextArea from "./textarea"
 
 interface BalanceForm {
   id?: string
@@ -44,8 +44,8 @@ const BalanceForm = ({ id }: BalanceForm) => {
     createdBy: user?.email ?? "🤷‍♂️",
   })
   const [ addedPoints, setAddedPoints ] = useState({ good: INITIAL_POINT_VALUES, bad: INITIAL_POINT_VALUES })
-  const goodPointRef = useRef<HTMLInputElement>(null)
-  const badPointRef = useRef<HTMLInputElement>(null)
+  const goodPointRef = useRef<HTMLTextAreaElement>(null)
+  const badPointRef = useRef<HTMLTextAreaElement>(null)
 
   useEffect(() => {
     if (balance && typeof balance === "object" && "date" in balance) {
@@ -154,9 +154,8 @@ const BalanceForm = ({ id }: BalanceForm) => {
           <div className="py-8 md:py-0 pr-0 md:pr-8">
             <Headline as="h3" classname="text-2xl pb-4">Good points</Headline>
             <div className="grid gap-2 mb-6">
-              <Input
+              <TextArea
                 ref={goodPointRef}
-                type="text"
                 value={addedPoints.good.text}
                 onChange={(e) => setAddedPoints({ ...addedPoints, good: { ...addedPoints.good, text: e.target.value } })}
                 placeholder="Add your point here..."
@@ -188,9 +187,8 @@ const BalanceForm = ({ id }: BalanceForm) => {
           <div className="py-8 md:py-0 pl-0 md:pl-8">
             <Headline as="h3" classname="text-2xl pb-4">Bad points</Headline>
             <div className="grid gap-2 mb-6">
-              <Input
+              <TextArea
                 ref={badPointRef}
-                type="text"
                 value={addedPoints.bad.text}
                 onChange={(e) => setAddedPoints({ ...addedPoints, bad: { ...addedPoints.bad, text: e.target.value } })}
                 placeholder="Add your point here..."
