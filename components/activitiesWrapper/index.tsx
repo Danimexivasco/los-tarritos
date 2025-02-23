@@ -23,7 +23,6 @@ const ActivitiesWrapper = ({}) => {
   const [ mediumActivities, setMediumActivities ] = useState<Array<DocumentData>>([]);
   const [ largeActivities, setLargeActivities ] = useState<Array<DocumentData>>([]);
   const [ user, loading, error ] = useAuthState()
-  
   const [ activities, loadingActivities, errorActivities, snapshot ] = useActivitiesData()
 
   useEffect(() => {

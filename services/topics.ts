@@ -33,10 +33,12 @@ export const useSingleTopicData = (id: string) => {
 export const createTopic = async (data: Topic) => {
   // Add a new document with a generated id.
   try {
-    await addDoc(_collection, data);
-    showMsg("Topic created", "success")
+    const newDocRef = await addDoc(_collection, data);
+    
+    return newDocRef?.id;
+    
   } catch {
-    showMsg("Something went wrong", "error")
+    throw new Error("Error creating the topic");
   }
 }
 
@@ -47,9 +49,9 @@ export const updateTopic = async (id: string, data: Topic | DocumentData) => {
   // Set the data of the document
   try {
     await setDoc(topicDoc, data);
-    showMsg("Topic updated", "success")
+    
   } catch {
-    showMsg("Something went wrong", "error")
+    throw new Error("Error updating the topic");
   }
 }
 

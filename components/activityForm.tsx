@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { createActivity, updateActivity } from "@/services/activities"
 import { Activity } from "@/types"
@@ -10,6 +10,9 @@ import TextArea from "@/components/textarea"
 import Link from "@/components/link"
 import { getPath } from "@/utils/getPath"
 import Headline from "./headline"
+import { showMsg } from "@/utils/showMessage"
+import { UserContext } from "./protectedRoute"
+import { sendEmail } from "@/utils/sendEmail"
 
 export interface ActivityFormProps {
   activity?: Activity | any
@@ -17,6 +20,7 @@ export interface ActivityFormProps {
 
 const ActivityForm = ({ activity }: ActivityFormProps) => {
   const router = useRouter()
+  const { user } = useContext(UserContext);
   const searchParams = useSearchParams()
   const [ formData, setFormData ] = useState<Activity>({
     type: searchParams.get("activityType") || ACTIVITY_TYPES.SHORT,
@@ -31,15 +35,50 @@ const ActivityForm = ({ activity }: ActivityFormProps) => {
   }, [ activity ])
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    // TODO: Add loading state during sendEmail
     e.preventDefault()
     if (isEditForm && activity?.id) {
       const updatedData = { ...formData, updatedAt: [ ...(activity?.updatedAt || []), new Date() ] }
+
       await updateActivity(activity.id, updatedData)
+
+      await sendEmail({
+        actor: user?.email,
+        subject: `Los tarritos🫙. An activity have been updated by ${user?.email}`,
+        message: `An activity have been updated by <strong>${user?.email}.</strong><br/><br/>
+        <strong>Date:</strong><br/>${formData.createdAt}<br/><br/>
+        <strong>Type:</strong><br/>${formData.type}<br/><br/>
+        <strong>Status:</strong><br/>${formData.status}<br/><br/>
+        <strong>Description:</strong><br/>${formData.text}<br/><br/>
+        Take a look on it here: ${window.location.origin}${getPath("Random Activities")}?activityType=${formData.type}`,
+      })
+
       router.push(`${getPath("Random Activities")}?activityType=${formData.type}`)
+      showMsg("Activity updated", "success")
       return
     }
-    await createActivity(formData)
+
+    try {
+      const activityId = await createActivity(formData)
+
+      if(activityId) {
+        await sendEmail({
+          actor: user?.email,
+          subject: `Los tarritos🫙. New activity created by ${user?.email}`,
+          message: `New activity created by <strong>${user?.email}.</strong><br/><br/>
+          <strong>Date:</strong><br/>${formData.createdAt}<br/><br/>
+          <strong>Type:</strong><br/>${formData.type}<br/><br/>
+          <strong>Status:</strong><br/>${formData.status}<br/><br/>
+          <strong>Description:</strong><br/>${formData.text}<br/><br/>
+          Take a look on it here: ${window.location.origin}${getPath("Random Activities")}?activityType=${formData.type}`,
+        })
+      }
+    } catch (error) {
+      showMsg("Error creating the activity", "error")
+    }
+
     router.push(`${getPath("Random Activities")}?activityType=${formData.type}`)
+    showMsg("Activity created", "success")
   }
 
   const isEditForm = Boolean(activity)

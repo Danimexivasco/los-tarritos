@@ -33,10 +33,11 @@ export const useSingleActivityData = (id: string) => {
 export const createActivity = async (data: Activity) => {
   // Add a new document with a generated id.
   try {
-    await addDoc(_collection, data);
-    showMsg("Activity created", "success")
+    const newDocRef = await addDoc(_collection, data);
+  
+    return newDocRef?.id;
   } catch {
-    showMsg("Something went wrong", "error")
+    throw new Error("Error creating the activity");
   }
 }
 
@@ -47,9 +48,9 @@ export const updateActivity = async (id: string, data: Activity | DocumentData) 
   // Set the data of the document
   try {
     await setDoc(activityDoc, data);
-    showMsg("Activity updated", "success")
+    
   } catch {
-    showMsg("Something went wrong", "error")
+    throw new Error("Error updating the activity");
   }
 }
 
