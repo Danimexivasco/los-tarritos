@@ -64,41 +64,41 @@ const RecipeForm = ({ id }: RecipeForm) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-     if (isEdit) {
-        try {
-          await updateRecipe(id as string, { ...formData, updatedAt: new Date() })
-          await sendEmail({
-            actor: user?.email,
-            subject: `Los tarritos🫙. A recipe have been updated by ${user?.email}`,
-            message: `A recipe have been updated by <strong>${user?.email}.</strong><br/><br/>
-            <strong>Date:</strong>${getDate(formData.createdAt)}<br/><br/>
-            <strong>Dificulty:</strong> ${formData.difficulty}<br/><br/>
-            <strong>Time:</strong> ${formData.time} mins<br/><br/>
-            <strong>Title:</strong> <strong>${formData.title}</strong><br/><br/>
-            <strong>Instructions:</strong> ${formData.instructions}<br/><br/>
-            Take a look on it here: ${window.location.origin}${getPath("Recipes")}`,
-          })
-        } catch  {
-          showMsg("Error updating the recipe", "error")
-        }
-      } else {
-        try {
-          await createRecipe(formData)
-          await sendEmail({
-            actor: user?.email,
-            subject: `Los tarritos🫙. A recipe have been created by ${user?.email}`,
-            message: `A recipe have been created by <strong>${user?.email}.</strong><br/><br/>
-           <strong>Date:</strong>${getDate(formData.createdAt)}<br/><br/>
-            <strong>Dificulty:</strong> ${formData.difficulty}<br/><br/>
-            <strong>Time:</strong> ${formData.time} mins<br/><br/>
-            <strong>Title:</strong> <strong>${formData.title}</strong><br/><br/>
-            <strong>Instructions:</strong> ${formData.instructions}<br/><br/>
-            Take a look on it here: ${window.location.origin}${getPath("Recipes")}`,
-          })
-        } catch {
-          showMsg("Error creating the topic", "error")
-        }
+    if (isEdit) {
+      try {
+        await updateRecipe(id as string, { ...formData, updatedAt: new Date() })
+        await sendEmail({
+          actor: user?.email,
+          subject: `Los tarritos🫙. A recipe have been updated by ${user?.email}`,
+          message: `A recipe have been updated by <strong>${user?.email}.</strong><br/><br/>
+          <strong>Date:</strong>${getDate(formData.createdAt)}<br/><br/>
+          <strong>Dificulty:</strong> ${formData.difficulty}<br/><br/>
+          <strong>Time:</strong> ${formData.time} mins<br/><br/>
+          <strong>Title:</strong> <strong>${formData.title}</strong><br/><br/>
+          <strong>Instructions:</strong> ${formData.instructions}<br/><br/>
+          Take a look on it here: ${window.location.origin}${getPath("Recipes")}`,
+        })
+      } catch  {
+        showMsg("Error updating the recipe", "error")
       }
+    } else {
+      try {
+        await createRecipe(formData)
+        await sendEmail({
+          actor: user?.email,
+          subject: `Los tarritos🫙. A recipe have been created by ${user?.email}`,
+          message: `A recipe have been created by <strong>${user?.email}.</strong><br/><br/>
+          <strong>Date:</strong>${getDate(formData.createdAt)}<br/><br/>
+          <strong>Dificulty:</strong> ${formData.difficulty}<br/><br/>
+          <strong>Time:</strong> ${formData.time} mins<br/><br/>
+          <strong>Title:</strong> <strong>${formData.title}</strong><br/><br/>
+          <strong>Instructions:</strong> ${formData.instructions}<br/><br/>
+          Take a look on it here: ${window.location.origin}${getPath("Recipes")}`,
+        })
+      } catch {
+        showMsg("Error creating the topic", "error")
+      }
+    }
       
     showMsg(isEdit ? "Recipe updated": "Recipe created", "success")
     router.push(getPath("Recipes"))
