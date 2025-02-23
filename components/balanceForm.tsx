@@ -19,6 +19,7 @@ import Headline from "./headline"
 import TrashIcon from "@/public/icons/trash.svg"
 import PlusIcon from "@/public/icons/plus.svg"
 import TextArea from "./textarea"
+import { sendEmail } from "@/utils/sendEmail"
 
 interface BalanceForm {
   id?: string
@@ -63,6 +64,7 @@ const BalanceForm = ({ id }: BalanceForm) => {
     if (lastBalance) {
       const _lastBalance = JSON.parse(lastBalance)
       setFormData({ ...formData, points: { ...formData.points, bad: [ ...formData.points.bad, ..._lastBalance?.points?.bad?.map((point: Point) => ({ ...point, isFromPreviousBalance: true })) ]  } })
+      console.log("formData", formData);
     }
   }, [])
 
@@ -114,19 +116,58 @@ const BalanceForm = ({ id }: BalanceForm) => {
   }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    // TODO: Add loading state during sendEmail
     e.preventDefault()
     if (formData.points.good.length === 0 && formData.points.bad.length === 0) {
       return showMsg("Please add at least one point", "error")
     }
     if (isEdit) {
-      const _formData = { ...formData, date: getDate(formData.date) }
-      await updateBalance(id ?? "", _formData)
-      router.push(getPath("Balances"))
-      return
+      try {
+        const _formData = { ...formData, date: getDate(formData.date) }
+
+        await updateBalance(id ?? "", _formData)
+
+        await sendEmail({
+          actor: user?.email,
+          subject: `Los tarritos🫙. A balance have been updated by ${user?.email}`,
+          message: `A balance have been updated by <strong>${user?.email}.</strong><br/><br/>
+          <strong>Date:</strong><br/>${getDate(formData.date)}<br/><br/>
+          <strong>Description:</strong><br/>${formData.description}<br/><br/>
+          ${formData.points.good.length > 0 && `<strong>Good points:</strong><br/><ul style="color: green">${formData.points.good.map(point => `<li>${point.text}</li>`).join("")}</ul><br/>`}
+          ${formData.points.bad.length > 0 && `<strong>Bad points:</strong><br/><ul style="color: red">${formData.points.bad.map(point => `<li>${point.text}</li>`).join("")}</ul><br/>`}
+          Take a look on it here: ${window.location.href}`,
+        })
+  
+        router.push(getPath("Balances"))
+  
+        showMsg("Balance updated", "success")
+  
+        return
+      } catch {
+        showMsg("Something went wrong", "error")
+      }
     } else {
       const _formData = { ...formData, date: getDate(formData.date) }
-      await createBalance(_formData)
-      router.push(getPath("Balances"))
+      try {
+        const balanceId = await createBalance(_formData)
+        
+        await sendEmail({
+          actor: user?.email,
+          subject: `Los tarritos🫙. New balance created by ${user?.email}`,
+          message: `New balance created by <strong>${user?.email}.</strong><br/><br/>
+          <strong>Date:</strong><br/>${getDate(formData.date)}<br/><br/>
+          <strong>Description:</strong><br/>${formData.description}<br/><br/>
+          ${formData.points.good.length > 0 && `<strong>Good points:</strong><br/><ul style="color: green">${formData.points.good.map(point => `<li>${point.text}</li>`).join("")}</ul><br/>`}
+          ${formData.points.bad.length > 0 && `<strong>Bad points:</strong><br/><ul style="color: red">${formData.points.bad.map(point => `<li>${point.text}</li>`).join("")}</ul><br/>`}
+          Take a look on it here: ${window.location.origin}${getPath("Edit Balance", balanceId)}`,
+        })
+
+        router.push(getPath("Balances"))
+
+        showMsg("Balance created", "success")
+      } catch {
+        showMsg("Something went wrong", "error")
+      }
     }
   }
 

@@ -33,10 +33,11 @@ export const useSingleBalanceData = (id: string) => {
 export const createBalance = async (data: Balance) => {
   // Add a new document with a generated id.
   try {
-    await addDoc(_collection, data);
-    showMsg("Balance created", "success")
+    const newDocRef = await addDoc(_collection, data);
+
+    return newDocRef?.id;
   } catch {
-    showMsg("Something went wrong", "error")
+    throw new Error("Error creating the balance");
   }
 }
 
@@ -47,9 +48,9 @@ export const updateBalance = async (id: string, data: Balance | DocumentData) =>
   // Set the data of the document
   try {
     await setDoc(balanceDoc, data);
-    showMsg("Balance updated", "success")
+    
   } catch {
-    showMsg("Something went wrong", "error")
+    throw new Error("Error updating the balance");
   }
 }
 
