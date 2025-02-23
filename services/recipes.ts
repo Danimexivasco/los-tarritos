@@ -34,9 +34,9 @@ export const createRecipe = async (data: Recipe) => {
   // Add a new document with a generated id.
   try {
     await addDoc(_collection, data);
-    showMsg("Recipe created", "success")
+    
   } catch {
-    showMsg("Something went wrong", "error")
+    throw new Error("Error creating the recipe");
   }
 }
 
@@ -47,9 +47,9 @@ export const updateRecipe = async (id: string, data: Recipe | DocumentData) => {
   // Set the data of the document
   try {
     await setDoc(recipeDoc, data);
-    showMsg("Recipe updated", "success")
+    
   } catch {
-    showMsg("Something went wrong", "error")
+    throw new Error("Error updating the recipe");
   }
 }
 

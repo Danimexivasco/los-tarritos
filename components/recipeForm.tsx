@@ -13,6 +13,9 @@ import { Recipe } from "@/types";
 import { isValidURL } from "@/utils/isValidURL";
 import { createRecipe, deleteRecipe, updateRecipe, useSingleRecipeData } from "@/services/recipes";
 import { useRouter } from "next/navigation";
+import { showMsg } from "@/utils/showMessage";
+import { sendEmail } from "@/utils/sendEmail";
+import { getDate } from "@/utils/getDate";
 
 interface RecipeForm {
   id?: string
@@ -44,6 +47,7 @@ const RecipeForm = ({ id }: RecipeForm) => {
 
   useEffect(() => {
     if (formData?.url) {
+      console.log("formData", formData);
       isValidURL(formData.url) ? setShowUrlLink(true) : setShowUrlLink(false)
     }
   }, [ formData?.url ])
@@ -60,7 +64,43 @@ const RecipeForm = ({ id }: RecipeForm) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    isEdit ? await updateRecipe(id as string, { ...formData, updatedAt: new Date() }) : await createRecipe(formData)
+     if (isEdit) {
+        try {
+          await updateRecipe(id as string, { ...formData, updatedAt: new Date() })
+          await sendEmail({
+            actor: user?.email,
+            subject: `Los tarritos🫙. A recipe have been updated by ${user?.email}`,
+            message: `A recipe have been updated by <strong>${user?.email}.</strong><br/><br/>
+            <strong>Date:</strong>${getDate(formData.createdAt)}<br/><br/>
+            <strong>Dificulty:</strong> ${formData.difficulty}<br/><br/>
+            <strong>Time:</strong> ${formData.time} mins<br/><br/>
+            <strong>Title:</strong> <strong>${formData.title}</strong><br/><br/>
+            <strong>Instructions:</strong> ${formData.instructions}<br/><br/>
+            Take a look on it here: ${window.location.origin}${getPath("Recipes")}`,
+          })
+        } catch  {
+          showMsg("Error updating the recipe", "error")
+        }
+      } else {
+        try {
+          await createRecipe(formData)
+          await sendEmail({
+            actor: user?.email,
+            subject: `Los tarritos🫙. A recipe have been created by ${user?.email}`,
+            message: `A recipe have been created by <strong>${user?.email}.</strong><br/><br/>
+           <strong>Date:</strong>${getDate(formData.createdAt)}<br/><br/>
+            <strong>Dificulty:</strong> ${formData.difficulty}<br/><br/>
+            <strong>Time:</strong> ${formData.time} mins<br/><br/>
+            <strong>Title:</strong> <strong>${formData.title}</strong><br/><br/>
+            <strong>Instructions:</strong> ${formData.instructions}<br/><br/>
+            Take a look on it here: ${window.location.origin}${getPath("Recipes")}`,
+          })
+        } catch {
+          showMsg("Error creating the topic", "error")
+        }
+      }
+      
+    showMsg(isEdit ? "Recipe updated": "Recipe created", "success")
     router.push(getPath("Recipes"))
   }
   return (
