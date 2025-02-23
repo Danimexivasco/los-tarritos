@@ -1,4 +1,3 @@
-import { PageSections } from "@/enums";
 import { validateEmailData } from "@/schemas/email";
 
 type EmailData = {
