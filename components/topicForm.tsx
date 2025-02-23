@@ -12,6 +12,8 @@ import { UserContext } from "@/components/protectedRoute"
 import Select from "@/components/select"
 import TextArea from "@/components/textarea"
 import Headline from "./headline"
+import { showMsg } from "@/utils/showMessage"
+import { sendEmail } from "@/utils/sendEmail"
 
 interface TopicFormProps {
   id?: string
@@ -38,7 +40,39 @@ const TopicForm = ({ id }: TopicFormProps) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    isEdit ? await updateTopic(id as string, { ...formData, updatedAt: new Date() }) : await createTopic(formData)
+    if (isEdit) {
+      try {
+        await updateTopic(id as string, { ...formData, updatedAt: new Date() })
+        await sendEmail({
+          actor: user?.email,
+          subject: `Los tarritos🫙. A topic have been updated by ${user?.email}`,
+          message: `A topic have been updated by <strong>${user?.email}.</strong><br/><br/>
+          <strong>Date:</strong><br/>${formData.createdAt} | <strong>Status:</strong><br/>${formData.status}<br/><br/>
+          <strong>${formData.title}</strong><br/>
+          ${formData.description}<br/><br/>
+          Take a look on it here: ${window.location.origin}${getPath("Topics")}`,
+        })
+      } catch  {
+        showMsg("Error updating the topic", "error")
+      }
+    } else {
+      try {
+        await createTopic(formData)
+        await sendEmail({
+          actor: user?.email,
+          subject: `Los tarritos🫙. A topic have been created by ${user?.email}`,
+          message: `A topic have been created by <strong>${user?.email}.</strong><br/><br/>
+          <strong>Date:</strong><br/>${formData.createdAt} | <strong>Status:</strong><br/>${formData.status}<br/><br/>
+          <strong>${formData.title}</strong><br/>
+          ${formData.description}<br/><br/>
+          Take a look on it here: ${window.location.origin}${getPath("Topics")}`,
+        })
+      } catch {
+        showMsg("Error creating the topic", "error")
+      }
+    }
+    
+    showMsg(isEdit ? "Topic updated": "Topic created", "success")
     router.push(getPath("Topics"))
   }
 
