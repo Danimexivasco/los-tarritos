@@ -33,7 +33,7 @@ const RecipesList = ({}) => {
     <>
       <Link
         href={`${getPath("New Recipe")}`}
-        className={"font-bold bg-emerald-500 hover:bg-emerald-700 w-full flex items-center justify-center rounded p-4 text-white my-8"}
+        className={"font-bold bg-emerald-500 hover:bg-emerald-700 w-full lg:w-fit flex items-center justify-center rounded p-4 text-white my-8 md:w-fit"}
       ><PlusIcon className="w-5 h-5 mr-2"/> NEW RECIPE </Link>
       <section className="mb-10 p-3 rounded border-2  border-slate-800-40 shadow-md cursor-pointer">
         <div className="flex items-center justify-between" onClick={() => setShowFilters(!showFilters)}>
@@ -44,7 +44,7 @@ const RecipesList = ({}) => {
           <hr className="border-slate-500/40 pb-4"/>
           <form className="grid gap-3 md:grid-cols-3 p-2" onSubmit={applyFilters}>
             {renderFormFields(RECIPES_FILTERS, tempfilters, handleChange)}
-            <div className="grid gap-2 mt-2 md:col-start-3">
+            <div className="grid gap-2 mt-2 md:flex md:col-start-3">
               <Button
                 type="submit"
                 text="Apply"

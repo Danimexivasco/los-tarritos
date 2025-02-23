@@ -39,7 +39,7 @@ const TopicList = ({}) => {
         <Link
           href={getPath("New Topic")}
           asButton
-          className={"font-bold bg-emerald-500 hover:bg-emerald-700 w-full flex items-center justify-center rounded p-4 text-white my-8"}
+          className={"font-bold bg-emerald-500 hover:bg-emerald-700 w-full flex items-center justify-center rounded p-4 text-white my-8 md:w-fit"}
         ><PlusIcon className="w-5 h-5 mr-2"/> Create first topic</Link>
       </>
     )
@@ -48,7 +48,7 @@ const TopicList = ({}) => {
     <>
       <Link
         href={`${getPath("New Topic")}`}
-        className={"font-bold bg-emerald-500 hover:bg-emerald-700 w-full flex items-center justify-center rounded p-4 text-white my-8"}
+        className={"font-bold bg-emerald-500 hover:bg-emerald-700 w-full flex items-center justify-center rounded p-4 text-white my-8 md:w-fit"}
       ><PlusIcon className="w-5 h-5 mr-2"/>NEW TOPIC</Link>
       {Object.entries(topicsByStatus)
         ?.sort(([ statusA ], [ statusB ]) =>

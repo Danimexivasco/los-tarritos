@@ -69,14 +69,14 @@ const BalancesList = ({}) => {
       <Link
         href={getPath("New Balance")}
         asButton
-        className={"font-bold bg-emerald-500 hover:bg-emerald-700 w-full flex items-center justify-center rounded p-4 text-white"}
+        className={"font-bold bg-emerald-500 hover:bg-emerald-700 w-full flex items-center justify-center rounded p-4 text-white md:w-fit"}
       ><PlusIcon className="w-5 h-5 mr-2"/>Create your first balance</Link>
     </>
   ) : (
     <>
       <Link
         href={`${getPath("New Balance")}`}
-        className={"font-bold bg-emerald-500 hover:bg-emerald-700 w-full flex items-center justify-center rounded p-4 text-white my-8"}
+        className={"font-bold bg-emerald-500 hover:bg-emerald-700 w-full flex items-center justify-center rounded p-4 text-white my-8 md:w-fit"}
       ><PlusIcon className="w-5 h-5 mr-2"/> NEW BALANCE </Link>
       {Object.entries(yearlyBalances)
         ?.sort(([ key ], [ key2 ]) => Number(key2) - Number(key))
