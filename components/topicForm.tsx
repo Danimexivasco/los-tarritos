@@ -45,7 +45,7 @@ const TopicForm = ({ id }: TopicFormProps) => {
         await updateTopic(id as string, { ...formData, updatedAt: new Date() })
         await sendEmail({
           actor: user?.email,
-          subject: `Los tarritos🫙. A topic have been updated by ${user?.email}`,
+          subject: `Los tarritos🏺. A topic have been updated by ${user?.email}`,
           message: `A topic have been updated by <strong>${user?.email}.</strong><br/><br/>
           <strong>Date:</strong><br/>${formData.createdAt} | <strong>Status:</strong><br/>${formData.status}<br/><br/>
           <strong>${formData.title}</strong><br/>
@@ -60,7 +60,7 @@ const TopicForm = ({ id }: TopicFormProps) => {
         await createTopic(formData)
         await sendEmail({
           actor: user?.email,
-          subject: `Los tarritos🫙. A topic have been created by ${user?.email}`,
+          subject: `Los tarritos🏺- A topic have been created by ${user?.email}`,
           message: `A topic have been created by <strong>${user?.email}.</strong><br/><br/>
           <strong>Date:</strong><br/>${formData.createdAt} | <strong>Status:</strong><br/>${formData.status}<br/><br/>
           <strong>${formData.title}</strong><br/>
