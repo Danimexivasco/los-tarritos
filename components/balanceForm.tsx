@@ -129,7 +129,7 @@ const BalanceForm = ({ id }: BalanceForm) => {
 
         await sendEmail({
           actor: user?.email,
-          subject: `Los tarritos🫙. A balance have been updated by ${user?.email}`,
+          subject: `Los tarritos🏺 - A balance have been updated by ${user?.email}`,
           message: `A balance have been updated by <strong>${user?.email}.</strong><br/><br/>
           <strong>Date:</strong><br/>${getDate(formData.date)}<br/><br/>
           <strong>Description:</strong><br/>${formData.description}<br/><br/>
@@ -153,7 +153,7 @@ const BalanceForm = ({ id }: BalanceForm) => {
         
         await sendEmail({
           actor: user?.email,
-          subject: `Los tarritos🫙. New balance created by ${user?.email}`,
+          subject: `Los tarritos🏺. New balance created by ${user?.email}`,
           message: `New balance created by <strong>${user?.email}.</strong><br/><br/>
           <strong>Date:</strong><br/>${getDate(formData.date)}<br/><br/>
           <strong>Description:</strong><br/>${formData.description}<br/><br/>

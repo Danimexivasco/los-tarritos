@@ -69,7 +69,7 @@ const RecipeForm = ({ id }: RecipeForm) => {
         await updateRecipe(id as string, { ...formData, updatedAt: new Date() })
         await sendEmail({
           actor: user?.email,
-          subject: `Los tarritos🫙. A recipe have been updated by ${user?.email}`,
+          subject: `Los tarritos🏺 - A recipe have been updated by ${user?.email}`,
           message: `A recipe have been updated by <strong>${user?.email}.</strong><br/><br/>
           <strong>Date:</strong>${getDate(formData.createdAt)}<br/><br/>
           <strong>Dificulty:</strong> ${formData.difficulty}<br/><br/>
@@ -86,7 +86,7 @@ const RecipeForm = ({ id }: RecipeForm) => {
         await createRecipe(formData)
         await sendEmail({
           actor: user?.email,
-          subject: `Los tarritos🫙. A recipe have been created by ${user?.email}`,
+          subject: `Los tarritos🏺. A recipe have been created by ${user?.email}`,
           message: `A recipe have been created by <strong>${user?.email}.</strong><br/><br/>
           <strong>Date:</strong>${getDate(formData.createdAt)}<br/><br/>
           <strong>Dificulty:</strong> ${formData.difficulty}<br/><br/>

@@ -44,7 +44,7 @@ const ActivityForm = ({ activity }: ActivityFormProps) => {
 
       await sendEmail({
         actor: user?.email,
-        subject: `Los tarritos🫙. An activity have been updated by ${user?.email}`,
+        subject: `Los tarritos🏺 - An activity have been updated by ${user?.email}`,
         message: `An activity have been updated by <strong>${user?.email}.</strong><br/><br/>
         <strong>Date:</strong><br/>${formData.createdAt}<br/><br/>
         <strong>Type:</strong><br/>${formData.type}<br/><br/>
@@ -64,7 +64,7 @@ const ActivityForm = ({ activity }: ActivityFormProps) => {
       if(activityId) {
         await sendEmail({
           actor: user?.email,
-          subject: `Los tarritos🫙. New activity created by ${user?.email}`,
+          subject: `Los tarritos🏺. New activity created by ${user?.email}`,
           message: `New activity created by <strong>${user?.email}.</strong><br/><br/>
           <strong>Date:</strong><br/>${formData.createdAt}<br/><br/>
           <strong>Type:</strong><br/>${formData.type}<br/><br/>
