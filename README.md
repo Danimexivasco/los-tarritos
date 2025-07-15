@@ -1,8 +1,68 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Los Tarritos ⚱️
 
-## Getting Started
+*Los Tarritos* is a web application designed to strengthen and take care of my relationship with my partner. The app includes the following sections:
 
-First, run the development server:
+- 🎯 **Random Plan Generator**: Get spontaneous suggestions for activities.
+- ⚖️ **Monthly balances** to see what’s going well and what we can improve
+- 🦜 **Interesting topics** to talk about and make sure they don’t get forgotten
+- 🧑🏽‍🍳 **Recipes** to enjoy cooking together
+
+## 🌟 Features
+
+- 🧩 **Modular Architecture**: Organized using components, hooks, and services for maintainability.
+- 🚀 **Next.js**: Server-side rendering and static site generation.
+- ⚙️ **Zod Schemas**: Robust schema validation for data integrity.
+- 🎨 **Tailwind CSS**: Rapid UI development with utility-first CSS.
+- 👀 **ESLint**: Ensuring code quality and consistency.
+
+## 🛠️ Tech Stack
+
+- **Framework**: [Next.js](https://nextjs.org/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Validation**: [Zod](https://zod.dev/)
+- **Linting**: [ESLint](https://eslint.org/)
+
+## 📁 Project Structure
+
+```bash
+los-tarritos/
+  ├── app/ # Next.js app directory
+  ├── components/ # Reusable UI components
+  ├── hooks/ # Custom React hooks
+  ├── public/ # Static assets
+  ├── schemas/ # Zod schemas for validation
+  ├── services/ # API and business logic services
+  ├── utils/ # Utility functions
+  ├── .eslintrc.json # ESLint configuration
+  ├── tailwind.config.ts # Tailwind CSS configuration
+  ├── tsconfig.json # TypeScript configuration
+  ├── package.json # Project metadata and scripts
+  └── README.md # Project documentation
+```
+
+## Installation
+
+1. **Clone the repository**:
+
+```bash
+git clone https://github.com/your-username/los-tarritos.git
+```
+
+2. **Install dependencies**:
+
+```bash
+cd los-tarritos
+npm install
+# or
+yarn install
+# or
+pnpm install
+# or
+bun install
+```
+
+3. **Run the app**:
 
 ```bash
 npm run dev
@@ -15,22 +75,3 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
