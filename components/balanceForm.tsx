@@ -68,16 +68,23 @@ const BalanceForm = ({ id }: BalanceForm) => {
     }
   }, [])
 
-  const handleAddedPoint = (type: "good" | "bad") => {
+  const handleAddedPoint = async (type: "good" | "bad") => {
     if (addedPoints[ type ]?.text === "") {
       return showMsg("Please add a point", "error")
     }
-    setFormData({
-      ...formData,
-      points: { ...formData.points,
-        [ type ]: [ ...formData.points[ type ], { ...addedPoints[ type ], id: generateId() } ] }
-    })
+
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      points: { ...prevFormData.points,
+        [ type ]: [ ...prevFormData.points[ type ], { ...addedPoints[ type ], id: generateId() } ] }
+    }))
+
     setAddedPoints({ ...addedPoints, [ type ]: INITIAL_POINT_VALUES })
+    
+    if (isEdit) {
+      await updateBalance(id ?? "", { ...formData, points: { ...formData.points, [ type ]: [ ...formData.points[ type ], { ...addedPoints[ type ], id: generateId() } ] } })
+      showMsg("Balance updated", "success")
+    }
   }
 
   const handleRemovePoint = (id: string, type: "good" | "bad") => {
